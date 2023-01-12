@@ -5,21 +5,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import strengthdetailscalculator.service.ScrewService;
-import strengthdetailscalculator.utils.AlertHandler;
+import strengthdetailscalculator.utils.response.Response;
+import strengthdetailscalculator.utils.response.ResponseStatus;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScrewSceneController extends Controller {
 
     ScrewService screwService = new ScrewService();
-    AlertHandler alertHandler = new AlertHandler();
-
-    @FXML
-    private TextField name;
-
-    @FXML
-    private TextField code;
 
     @FXML
     private TextField mainD;
@@ -31,27 +26,17 @@ public class ScrewSceneController extends Controller {
     private TextField height;
 
     @FXML
-    private TextField material;
-
-    @FXML
-    private TextField yieldStress;
-
-    @FXML
-    private TextField force;
-
-    @FXML
     private CheckBox isTrapezoidal;
 
-
     public void printDoc(ActionEvent event) throws IOException {
-        String response = screwService.getResponse(List.of(name, code, material),
-                List.of(mainD, threadPitch, height, yieldStress, force), List.of(isTrapezoidal));
-        if (response.equals("OK")) {
-            switchFinishScene(event);
-        } else {
-            alertHandler.getErrorInputData(response);
+            List<TextField> screwNumericalData = new ArrayList<>(List.of(mainD, threadPitch, height));
+            Response response = screwService.write(getTextDataDetail(), getNumericalDataDetail(), screwNumericalData, List.of(isTrapezoidal));
+            if (response.getResponseStatus() == ResponseStatus.SUCCESS) {
+                switchFinishScene(event);
+            } else {
+                alertHandler.getErrorInputData(response.getDescription());
+            }
         }
-    }
 
     private void switchFinishScene(ActionEvent event) throws IOException {
         switchSceneByEvent(PATH_FINISH_SCENE, NAME_FINISH_SCENE, event);

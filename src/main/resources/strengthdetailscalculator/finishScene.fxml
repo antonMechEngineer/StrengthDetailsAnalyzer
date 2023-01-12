@@ -6,22 +6,24 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="167.0" prefWidth="241.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="strengthdetailscalculator.controller.FinishSceneController">
-   <children>
-      <Label layoutX="22.0" layoutY="21.0" prefHeight="44.0" prefWidth="219.0" text="Выполнить ещё расчёт ?" textAlignment="CENTER">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Button layoutX="147.0" layoutY="86.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="69.0" onAction="#switchStartScene" text="Да">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="31.0" layoutY="86.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="69.0" onAction="#finishApplication" text="Нет">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-   </children>
+<AnchorPane prefHeight="167.0" prefWidth="241.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="strengthdetailscalculator.controller.FinishSceneController">
+   <Label layoutX="22.0" layoutY="21.0" prefHeight="44.0" prefWidth="219.0" text="Выполнить ещё расчёт ?"
+          textAlignment="CENTER">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <Button layoutX="147.0" layoutY="86.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="69.0"
+           onAction="#switchStartScene" text="Да">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </Button>
+   <Button layoutX="31.0" layoutY="86.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="69.0"
+           onAction="#finishApplication" text="Нет">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </Button>
 </AnchorPane>

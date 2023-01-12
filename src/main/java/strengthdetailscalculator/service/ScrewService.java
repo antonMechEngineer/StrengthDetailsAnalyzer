@@ -2,10 +2,13 @@ package strengthdetailscalculator.service;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import strengthdetailscalculator.entity.Detail;
 import strengthdetailscalculator.entity.Screw;
 import strengthdetailscalculator.entity.enums.ScrewType;
-import strengthdetailscalculator.utils.DocumentWriter;
-import strengthdetailscalculator.utils.InputDataManager;
+import strengthdetailscalculator.service.interfaces.FullChecked;
+import strengthdetailscalculator.utils.response.Response;
+import strengthdetailscalculator.utils.response.ResponseStatus;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -13,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-public class ScrewService {
+public class ScrewService extends DetailService implements FullChecked {
 
     private static final Integer INDEX_MID_D = 0;
     private static final Integer INDEX_INTERNAL_D = 1;
@@ -22,46 +25,37 @@ public class ScrewService {
     private HashMap<Double, HashMap<Double, List<Double>>> trapezoidalScrewData = new HashMap<>();
     private static final String DATA_PATH_METRICAL_SCREW = "src/main/resources/data/screw/metricalScrewData.csv";
     private static final String DATA_PATH_TRAPEZOIDAL_SCREW = "src/main/resources/data/screw/trapezoidalScrewData.csv";
-    private final DocumentWriter documentWriter = new DocumentWriter();
-    private final InputDataManager inputDataManager = new InputDataManager();
 
     public ScrewService() {
         loadDataFromCSVFile(DATA_PATH_METRICAL_SCREW, metricalScrewData);
         loadDataFromCSVFile(DATA_PATH_TRAPEZOIDAL_SCREW, trapezoidalScrewData);
     }
 
-    public String getResponse(List<TextField> textData, List<TextField> numericalData, List<CheckBox> checkBoxes) {
-        inputDataManager.prepareNumericalData(numericalData);
-        String errorTextData = inputDataManager.checkTextData(textData);
-        String errorNumericalData = inputDataManager.checkNumericalData(numericalData);
-        if (errorTextData.length() == 0 && errorNumericalData.length() == 0) {
-            Screw screw = buildScrew(textData, numericalData, checkBoxes);
-            String errorThreadProperties = inputDataManager.checkInputThreadProperties(screw);
-            if (!errorThreadProperties.equals("OK")) {
-                return errorThreadProperties;
+    public Response write(List<TextField> textDataDetail, List<TextField> textNumericalData,
+                          List<TextField> screwNumericalData, List<CheckBox> checkBoxes) {
+        Response preProcessDetailResponse = preProcessDetailData(textDataDetail, textNumericalData, screwNumericalData);
+        if (preProcessDetailResponse.getResponseStatus() == ResponseStatus.SUCCESS) {
+            Detail detail = new Detail(textDataDetail, textNumericalData);
+            Screw screw = build(detail, screwNumericalData, checkBoxes);
+            Response errorResponseThreadProperties = inputDataManager.checkInputThreadProperties(screw);
+            if (errorResponseThreadProperties.getResponseStatus() == ResponseStatus.FAIL) {
+                return errorResponseThreadProperties;
             }
             documentWriter.writeScrew(screw);
-            return "OK";
+            return new Response(ResponseStatus.SUCCESS);
         }
-        return errorTextData + errorNumericalData;
+        return preProcessDetailResponse;
     }
 
-    private Screw buildScrew(List<TextField> textData, List<TextField> numericalData, List<CheckBox> checkBoxes) {
+    private Screw build(Detail detail, List<TextField> numericalData, List<CheckBox> checkBoxes) {
         ScrewType screwType = ScrewType.METRICAL;
         if (checkBoxes.get(0).isSelected()) {
             screwType = ScrewType.TRAPEZOIDAL;
         }
-        String name = textData.get(0).getText();
-        String code = textData.get(1).getText();
-        String material = textData.get(2).getText();
         Double mainD = Double.valueOf(numericalData.get(0).getText());
         Double threadPitch = Double.valueOf(numericalData.get(1).getText());
         Double height = Double.valueOf(numericalData.get(2).getText());
-        Double yieldStress = Double.valueOf(numericalData.get(3).getText());
-        Double force = Double.valueOf(numericalData.get(4).getText());
-
-        Screw screw = new Screw(
-                name, code, material, yieldStress, force,
+        Screw screw = new Screw(detail,
                 mainD, threadPitch, height, screwType,
                 getInternalD(mainD, threadPitch, screwType),
                 getMinD(mainD, threadPitch, screwType));
@@ -136,5 +130,11 @@ public class ScrewService {
         screwLine.put(mainD, pitchData);
         return screwLine;
     }
+
+    @Override
+    protected Response getResultChecking(List<TextField> textDetailData, List<TextField> numericalDetailData, List<TextField> numericalScrewData) {
+        return fullCheckDetailData(textDetailData, numericalDetailData, numericalScrewData);
+    }
+
 
 }

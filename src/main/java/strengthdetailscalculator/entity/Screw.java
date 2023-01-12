@@ -2,6 +2,7 @@ package strengthdetailscalculator.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import strengthdetailscalculator.entity.enums.ScrewType;
 import strengthdetailscalculator.entity.interfaces.AxialDeformable;
 import strengthdetailscalculator.entity.interfaces.ShearDeformable;
@@ -10,6 +11,7 @@ import static java.lang.Math.pow;
 
 @Getter
 @Setter
+@ToString
 public class Screw extends Detail implements ShearDeformable, AxialDeformable {
     private final static Integer NUMBER_ACTIVE_SCREW_PITCHES = 8;
     private final Double mainD;
@@ -42,6 +44,25 @@ public class Screw extends Detail implements ShearDeformable, AxialDeformable {
         this.axialStress = calculateAxialStress(force);
         this.axialSafetyFactor = calculateAxialSafetyFactor(force, yieldStress);
     }
+
+    public Screw (Detail detail, Double mainD, Double threadPitch, Double height, ScrewType screwType, Double internalD, Double minD){
+        super(detail.getName(), detail.getCode(), detail.getMaterial(), detail.getYieldStress(), detail.getForce());
+        this.mainD = mainD;
+        this.threadPitch = threadPitch;
+        this.height = height;
+        this.screwType = screwType;
+        this.internalD = internalD;
+        this.minD = minD;
+        clarifyLengthScrew();
+        this.shearArea = calculateShearArea();
+        this.shearStress = calculateShearStress(force);
+        this.shearSafetyFactor = calculateShearSafetyFactor(force, yieldStress);
+        this.axialArea = calculateAxialArea();
+        this.axialStress = calculateAxialStress(force);
+        this.axialSafetyFactor = calculateAxialSafetyFactor(force, yieldStress);
+
+    }
+
 
     @Override
     public Double calculateShearArea() {
