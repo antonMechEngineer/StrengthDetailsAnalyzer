@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import strengthdetailscalculator.StrengthDetailsCalculator;
 import strengthdetailscalculator.utils.AlertHandler;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Controller {
@@ -26,6 +27,12 @@ public abstract class Controller {
     protected static final String NAME_SCREW_SCENE = "Расчёт прочности резьбы";
     protected static final String NAME_PIN_SCENE = "Расчёт прочности штифта";
     protected static final String NAME_FINISH_SCENE = NAME_START_SCENE;
+
+    public static final Integer INDEX_NAME = 0;
+    public static final Integer INDEX_CODE = 1;
+    public static final Integer INDEX_MATERIAL = 2;
+    public static final Integer INDEX_YIELD_STRESS = 0;
+    public static final Integer INDEX_FORCE = 1;
 
     protected Stage stage;
     protected Scene scene;
@@ -65,11 +72,22 @@ public abstract class Controller {
         stage.show();
     }
 
+    public void switchStartScene(ActionEvent event) throws IOException {
+        switchSceneByEvent(PATH_START_SCENE, NAME_START_SCENE, event);
+    }
+
     protected List<TextField> getTextDataDetail(){
-        return  List.of(name, code, material);
+        ArrayList<TextField> textDataDetail = new ArrayList<>();
+        textDataDetail.add(INDEX_NAME, name);
+        textDataDetail.add(INDEX_CODE, code);
+        textDataDetail.add(INDEX_MATERIAL, material);
+        return  textDataDetail;
     }
 
     protected List<TextField> getNumericalDataDetail(){
+        ArrayList<TextField> numericalDataDetail = new ArrayList<>();
+        numericalDataDetail.add(INDEX_YIELD_STRESS, yieldStress);
+        numericalDataDetail.add(INDEX_FORCE, force);
         return List.of(yieldStress, force);
     }
 

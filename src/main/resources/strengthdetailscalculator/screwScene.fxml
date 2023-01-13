@@ -7,70 +7,66 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0"
-            prefWidth="481.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="strengthdetailscalculator.controller.ScrewSceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="481.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="strengthdetailscalculator.controller.ScrewSceneController">
    <Label layoutX="98.0" layoutY="14.0" text="Введите характеристики резьбы">
       <font>
-         <Font size="20.0"/>
+         <Font size="20.0" />
       </font>
    </Label>
    <Label layoutX="73.0" layoutY="87.0" text="Наименование детали">
       <font>
-         <Font size="14.0"/>
+         <Font size="14.0" />
       </font>
    </Label>
    <Label layoutX="73.0" layoutY="119.0" text="Обозначение">
       <font>
-         <Font size="14.0"/>
+         <Font size="14.0" />
       </font>
    </Label>
    <Label layoutX="73.0" layoutY="154.0" text="Внешний диаметр">
       <font>
-         <Font size="14.0"/>
+         <Font size="14.0" />
       </font>
    </Label>
    <Label layoutX="73.0" layoutY="191.0" text="Шаг резьбы">
       <font>
-         <Font size="14.0"/>
+         <Font size="14.0" />
       </font>
    </Label>
    <Label layoutX="73.0" layoutY="296.0" text="Предел текучести материала">
       <font>
-         <Font size="14.0"/>
+         <Font size="14.0" />
       </font>
    </Label>
    <Label layoutX="73.0" layoutY="259.0" text="Материал">
       <font>
-         <Font size="14.0"/>
+         <Font size="14.0" />
       </font>
    </Label>
    <Label layoutX="73.0" layoutY="226.0" text="Высота резьбы">
       <font>
-         <Font size="14.0"/>
+         <Font size="14.0" />
       </font>
    </Label>
    <Label layoutX="73.0" layoutY="336.0" text="Действующее усилие">
       <font>
-         <Font size="14.0"/>
+         <Font size="14.0" />
       </font>
    </Label>
-   <TextField fx:id="name" layoutX="282.0" layoutY="85.0" prefHeight="25.0" prefWidth="171.0"/>
-   <TextField fx:id="code" layoutX="282.0" layoutY="117.0" prefHeight="25.0" prefWidth="171.0"/>
-   <TextField fx:id="mainD" layoutX="282.0" layoutY="152.0" prefHeight="25.0" prefWidth="171.0"/>
-   <TextField fx:id="threadPitch" layoutX="282.0" layoutY="189.0" prefHeight="25.0" prefWidth="171.0"/>
-   <TextField fx:id="height" layoutX="282.0" layoutY="224.0" prefHeight="25.0" prefWidth="171.0"/>
-   <TextField fx:id="material" layoutX="282.0" layoutY="257.0" prefHeight="25.0" prefWidth="171.0"/>
-   <TextField fx:id="yieldStress" layoutX="282.0" layoutY="294.0" prefHeight="25.0" prefWidth="171.0"/>
-   <TextField fx:id="force" layoutX="282.0" layoutY="334.0" prefHeight="25.0" prefWidth="171.0"/>
-   <CheckBox fx:id="isTrapezoidal" alignment="TOP_LEFT" layoutX="84.0" layoutY="377.0" mnemonicParsing="false"
-             text="Резьба трапецеидальная (по дефолту метрическая)" textAlignment="JUSTIFY">
+   <TextField fx:id="name" layoutX="282.0" layoutY="85.0" prefHeight="25.0" prefWidth="171.0" />
+   <TextField fx:id="code" layoutX="282.0" layoutY="117.0" prefHeight="25.0" prefWidth="171.0" />
+   <TextField fx:id="mainD" layoutX="282.0" layoutY="152.0" prefHeight="25.0" prefWidth="171.0" />
+   <TextField fx:id="threadPitch" layoutX="282.0" layoutY="189.0" prefHeight="25.0" prefWidth="171.0" />
+   <TextField fx:id="height" layoutX="282.0" layoutY="224.0" prefHeight="25.0" prefWidth="171.0" />
+   <TextField fx:id="material" layoutX="282.0" layoutY="257.0" prefHeight="25.0" prefWidth="171.0" />
+   <TextField fx:id="yieldStress" layoutX="282.0" layoutY="294.0" prefHeight="25.0" prefWidth="171.0" />
+   <TextField fx:id="force" layoutX="282.0" layoutY="334.0" prefHeight="25.0" prefWidth="171.0" />
+   <CheckBox fx:id="isTrapezoidal" alignment="TOP_LEFT" layoutX="84.0" layoutY="377.0" mnemonicParsing="false" text="Резьба трапецеидальная (по дефолту метрическая)" textAlignment="JUSTIFY">
       <font>
-         <Font size="14.0"/>
+         <Font size="14.0" />
       </font>
    </CheckBox>
-   <Button layoutX="152.0" layoutY="422.0" mnemonicParsing="false" onAction="#printDoc" prefHeight="25.0"
-           prefWidth="186.0" text="Раcчитать и получить отчёт"/>
-   <Label layoutX="102.0" layoutY="44.0" prefHeight="25.0" prefWidth="313.0"
-          text="Числовые характеристики вводятся в формате XXX.XXX"/>
+   <Button layoutX="246.0" layoutY="421.0" mnemonicParsing="false" onAction="#printDoc" prefHeight="25.0" prefWidth="186.0" text="Раcчитать и получить отчёт" />
+   <Label layoutX="102.0" layoutY="44.0" prefHeight="25.0" prefWidth="313.0" text="Числовые характеристики вводятся в формате XXX.XXX" />
+   <Button layoutX="87.0" layoutY="421.0" mnemonicParsing="false" onAction="#switchStartScene" prefHeight="25.0" prefWidth="111.0" text="В главное меню" />
 </AnchorPane>

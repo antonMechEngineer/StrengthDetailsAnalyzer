@@ -10,8 +10,8 @@ public interface FullChecked extends ResponseCovered {
     default Response fullCheckDetailData(List<TextField> textDetailData, List<TextField> numericalDetailData, List<TextField> numericalData){
         InputDataManager inputDataManager = new InputDataManager();
         Response errorDetailTextData = inputDataManager.checkTextData(textDetailData);
-        Response errorNumericalDetailData = inputDataManager.checkFullNumericalData(numericalDetailData);
-        Response errorNumericalData = inputDataManager.checkFullNumericalData(numericalData);
+        Response errorNumericalDetailData = inputDataManager.checkPositiveNumericalData(numericalDetailData);
+        Response errorNumericalData = inputDataManager.checkPositiveNumericalData(numericalData);
         return coverToResponse(errorDetailTextData.getDescription() + errorNumericalDetailData.getDescription() + errorNumericalData.getDescription());
     }
 }

@@ -15,6 +15,10 @@ public class PinSceneController extends Controller {
 
     PinService pinService = new PinService();
 
+    public static final Integer INDEX_OUTER_DIAMETER = 0;
+    public static final Integer INDEX_INTERNAL_DIAMETER = 1;
+    public static final Integer INDEX_NUMBER_SHEAR_SECTION = 2;
+
     @FXML
     private TextField outerDiameter;
 
@@ -25,8 +29,7 @@ public class PinSceneController extends Controller {
     private TextField numberShearSection;
 
     public void printDoc(ActionEvent event) throws IOException {
-        List<TextField> numericalPinData = new ArrayList<>(List.of(outerDiameter, internalDiameter, numberShearSection));
-        Response response = pinService.write(getTextDataDetail(), getNumericalDataDetail(), numericalPinData);
+        Response response = pinService.write(getTextDataDetail(), getNumericalDataDetail(), getPinData());
         if (response.getResponseStatus() == ResponseStatus.SUCCESS) {
             switchFinishScene(event);
         } else {
@@ -34,7 +37,16 @@ public class PinSceneController extends Controller {
         }
     }
 
+
     private void switchFinishScene(ActionEvent event) throws IOException {
         switchSceneByEvent(PATH_FINISH_SCENE, NAME_FINISH_SCENE, event);
+    }
+
+    protected List<TextField> getPinData() {
+        ArrayList<TextField> pinData = new ArrayList<>();
+        pinData.add(INDEX_OUTER_DIAMETER, outerDiameter);
+        pinData.add(INDEX_INTERNAL_DIAMETER, internalDiameter);
+        pinData.add(INDEX_NUMBER_SHEAR_SECTION, numberShearSection);
+        return pinData;
     }
 }

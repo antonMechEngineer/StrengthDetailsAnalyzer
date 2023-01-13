@@ -10,7 +10,7 @@ public interface DetailChecked extends ResponseCovered {
     default Response checkDetailData(List<TextField> textDetailData, List<TextField> numericalDetailData){
         InputDataManager inputDataManager = new InputDataManager();
         Response errorDetailTextData = inputDataManager.checkTextData(textDetailData);
-        Response errorNumericalDetailData = inputDataManager.checkFullNumericalData(numericalDetailData);
+        Response errorNumericalDetailData = inputDataManager.checkPositiveNumericalData(numericalDetailData);
         return coverToResponse(errorDetailTextData.getDescription() + errorNumericalDetailData.getDescription());
     }
 }

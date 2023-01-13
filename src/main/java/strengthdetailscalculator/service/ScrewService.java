@@ -32,11 +32,11 @@ public class ScrewService extends DetailService implements FullChecked {
     }
 
     public Response write(List<TextField> textDataDetail, List<TextField> textNumericalData,
-                          List<TextField> screwNumericalData, List<CheckBox> checkBoxes) {
-        Response preProcessDetailResponse = preProcessDetailData(textDataDetail, textNumericalData, screwNumericalData);
+                          List<TextField> screwData, List<CheckBox> checkBoxes) {
+        Response preProcessDetailResponse = preProcessDetailData(textDataDetail, textNumericalData, screwData);
         if (preProcessDetailResponse.getResponseStatus() == ResponseStatus.SUCCESS) {
             Detail detail = new Detail(textDataDetail, textNumericalData);
-            Screw screw = build(detail, screwNumericalData, checkBoxes);
+            Screw screw = build(detail, screwData, checkBoxes);
             Response errorResponseThreadProperties = inputDataManager.checkInputThreadProperties(screw);
             if (errorResponseThreadProperties.getResponseStatus() == ResponseStatus.FAIL) {
                 return errorResponseThreadProperties;

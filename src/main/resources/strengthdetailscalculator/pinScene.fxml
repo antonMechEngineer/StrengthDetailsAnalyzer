@@ -61,5 +61,6 @@
    <TextField fx:id="material" layoutX="257.0" layoutY="257.0" prefHeight="25.0" prefWidth="171.0" />
    <TextField fx:id="yieldStress" layoutX="257.0" layoutY="294.0" prefHeight="25.0" prefWidth="171.0" />
    <TextField fx:id="force" layoutX="257.0" layoutY="334.0" prefHeight="25.0" prefWidth="171.0" />
-   <Button layoutX="129.0" layoutY="384.0" mnemonicParsing="false" onAction="#printDoc" prefHeight="25.0" prefWidth="186.0" text="Раcчитать и получить отчёт" />
+   <Button layoutX="222.0" layoutY="384.0" mnemonicParsing="false" onAction="#printDoc" prefHeight="25.0" prefWidth="204.0" text="Раcчитать и получить отчёт" />
+   <Button layoutX="50.0" layoutY="384.0" mnemonicParsing="false" onAction="#switchStartScene" prefHeight="25.0" prefWidth="111.0" text="В главное меню" />
 </AnchorPane>
