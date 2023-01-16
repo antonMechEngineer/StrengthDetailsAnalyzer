@@ -32,6 +32,23 @@ public class Axle extends Pin implements BendingDeformable, ComplexDeformable {
         this.vonMissesSafetyFactor = calculateVonMissesSafetyFactor(force, yieldStress);
     }
 
+    public Axle(Pin pin, Double supportLength) {
+        super(pin.getName(), pin.getCode(), pin.getMaterial(), pin.getYieldStress(), pin.getForce(),
+                pin.getOuterDiameter(), pin.getInternalDiameter(), pin.getNumberShearSection());
+        this.supportLength = supportLength;
+        this.bendingResistance = calculateBendingResistance();
+        this.bendingStress = calculateBendingStress();
+        this.bendingSafetyFactor = calculateBendingSafetyFactor(pin.getForce(), pin.getYieldStress());
+        this.bendingMoment = calculateBendingMoment();
+        this.vonMissesStress = calculateVonMissesStress(pin.getForce());
+        this.vonMissesSafetyFactor = calculateVonMissesSafetyFactor(pin.getForce(), pin.getYieldStress());
+    }
+
+    @Override
+    public Double calculateVonMissesStress(Double force) {
+        return pow((pow(calculateBendingStress(), 2) + 3 * pow(calculateShearStress(force), 2)), 0.5);
+    }
+
     @Override
     public Double calculateShearArea() {
         return  numberShearSection * PI * pow(outerDiameter, 2.0) / 4;

@@ -55,15 +55,12 @@ public class Screw extends Detail implements ShearDeformable, AxialDeformable {
         this.minD = minD;
         clarifyLengthScrew();
         this.shearArea = calculateShearArea();
-        this.shearStress = calculateShearStress(force);
-        this.shearSafetyFactor = calculateShearSafetyFactor(force, yieldStress);
+        this.shearStress = calculateShearStress(detail.getForce());
+        this.shearSafetyFactor = calculateShearSafetyFactor(detail.getForce(), detail.getYieldStress());
         this.axialArea = calculateAxialArea();
-        this.axialStress = calculateAxialStress(force);
-        this.axialSafetyFactor = calculateAxialSafetyFactor(force, yieldStress);
-
+        this.axialStress = calculateAxialStress(detail.getForce());
+        this.axialSafetyFactor = calculateAxialSafetyFactor(detail.getForce(), detail.getYieldStress());
     }
-
-
     @Override
     public Double calculateShearArea() {
         return PI * screwType.kp * internalD * height * calculateKh();

@@ -9,12 +9,12 @@ import java.util.List;
 @Getter
 @Setter
 public class Detail {
-    protected final String name;
-    protected final String code;
-    protected final String material;
-    protected final Double yieldStress;
+    private final String name;
+    private final String code;
+    private final String material;
+    private final Double yieldStress;
     protected final Double force;
-    protected final Double minSafetyFactor = 1.0;
+    private final Double minSafetyFactor = 1.0;
 
     public Detail(String name, String code, String material, Double yieldStress, Double force) {
         this.name = name;

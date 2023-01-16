@@ -9,7 +9,7 @@
    <children>
       <Button layoutX="78.0" layoutY="54.0" mnemonicParsing="false" onAction="#switchToScrewScene" text="Резьбовое соединение" />
       <Button layoutX="117.0" layoutY="89.0" mnemonicParsing="false" onAction="#switchToPinScene" text="Штифт (срез)" />
-      <Button layoutX="95.0" layoutY="126.0" mnemonicParsing="false" text="Ось (изгиб и срез)" />
+      <Button layoutX="95.0" layoutY="126.0" mnemonicParsing="false" onAction="#switchToAxleScene" text="Ось (изгиб и срез)" />
       <Button layoutX="75.0" layoutY="203.0" mnemonicParsing="false" text="Проушина (растяжение)" />
       <Button layoutX="56.0" layoutY="242.0" mnemonicParsing="false" text="Проушина (контактное давление)" />
       <Button layoutX="123.0" layoutY="166.0" mnemonicParsing="false" text="Шпонка" />

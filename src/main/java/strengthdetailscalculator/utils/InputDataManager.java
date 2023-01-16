@@ -1,6 +1,7 @@
 package strengthdetailscalculator.utils;
 
 import javafx.scene.control.TextField;
+import strengthdetailscalculator.entity.Axle;
 import strengthdetailscalculator.entity.Screw;
 import strengthdetailscalculator.utils.response.Response;
 
@@ -69,6 +70,15 @@ public class InputDataManager implements ResponseCovered {
         }
         return coverToResponse(error);
     }
+
+    public Response checkInputAxleProperties(Axle axle){
+        String error = "";
+        if (axle.getSupportLength() == 0){
+            error = " длина = " + axle.getSupportLength() + " не допустима.";
+        }
+        return coverToResponse(error);
+    }
+
 
     private void writeError(StringBuilder stringBuilder, TextField textField) {
         stringBuilder.append(textField.getId());

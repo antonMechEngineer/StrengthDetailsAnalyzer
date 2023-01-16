@@ -1,7 +1,9 @@
 package strengthdetailscalculator.service;
 
+import javafx.scene.Parent;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import strengthdetailscalculator.controller.ScrewSceneDetailController;
 import strengthdetailscalculator.entity.Detail;
 import strengthdetailscalculator.entity.Screw;
 import strengthdetailscalculator.entity.enums.ScrewType;
@@ -16,8 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-public class ScrewService extends DetailService implements FullChecked {
-
+public final class ScrewService extends DetailService implements FullChecked {
     private static final Integer INDEX_MID_D = 0;
     private static final Integer INDEX_INTERNAL_D = 1;
     private static final Integer INDEX_MIN_D = 2;
@@ -31,25 +32,29 @@ public class ScrewService extends DetailService implements FullChecked {
         loadDataFromCSVFile(DATA_PATH_TRAPEZOIDAL_SCREW, trapezoidalScrewData);
     }
 
-    public Response write(List<TextField> textDataDetail, List<TextField> textNumericalData,
-                          List<TextField> screwData, List<CheckBox> checkBoxes) {
-        Response preProcessDetailResponse = preProcessDetailData(textDataDetail, textNumericalData, screwData);
-        if (preProcessDetailResponse.getResponseStatus() == ResponseStatus.SUCCESS) {
-            Detail detail = new Detail(textDataDetail, textNumericalData);
-            Screw screw = build(detail, screwData, checkBoxes);
-            Response errorResponseThreadProperties = inputDataManager.checkInputThreadProperties(screw);
-            if (errorResponseThreadProperties.getResponseStatus() == ResponseStatus.FAIL) {
-                return errorResponseThreadProperties;
-            }
-            documentWriter.writeScrew(screw);
-            return new Response(ResponseStatus.SUCCESS);
+    @Override
+    protected Response writeSpecifiedDetail(Detail detail, List<Parent> data) {
+        Screw screw = build(detail, data);
+        Response errorResponseThreadProperties = inputDataManager.checkInputThreadProperties(screw);
+        if (errorResponseThreadProperties.getResponseStatus() == ResponseStatus.FAIL) {
+            return errorResponseThreadProperties;
         }
-        return preProcessDetailResponse;
+        documentWriter.writeScrew(screw);
+        return new Response(ResponseStatus.SUCCESS);
+
     }
 
-    private Screw build(Detail detail, List<TextField> numericalData, List<CheckBox> checkBoxes) {
+    @Override
+    protected Response getResultChecking(List<TextField> textDetailData, List<TextField> numericalDetailData, List<Parent> data) {
+        List<TextField> numericalScrewData = safetyCastToTextFields(data);
+        return fullCheckDetailData(textDetailData, numericalDetailData, numericalScrewData);
+    }
+
+    private Screw build(Detail detail, List<Parent> data) {
         ScrewType screwType = ScrewType.METRICAL;
-        if (checkBoxes.get(0).isSelected()) {
+        CheckBox checkBoxTypeScrew = (CheckBox)data.get(ScrewSceneDetailController.INDEX_TYPE_SCREW);
+        List <TextField> numericalData = safetyCastToTextFields(data);
+        if (checkBoxTypeScrew.isSelected()) {
             screwType = ScrewType.TRAPEZOIDAL;
         }
         Double mainD = Double.valueOf(numericalData.get(0).getText());
@@ -130,11 +135,5 @@ public class ScrewService extends DetailService implements FullChecked {
         screwLine.put(mainD, pitchData);
         return screwLine;
     }
-
-    @Override
-    protected Response getResultChecking(List<TextField> textDetailData, List<TextField> numericalDetailData, List<TextField> numericalScrewData) {
-        return fullCheckDetailData(textDetailData, numericalDetailData, numericalScrewData);
-    }
-
 
 }

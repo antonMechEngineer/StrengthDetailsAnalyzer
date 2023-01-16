@@ -2,16 +2,16 @@ package strengthdetailscalculator.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import strengthdetailscalculator.service.PinService;
 import strengthdetailscalculator.utils.response.Response;
-import strengthdetailscalculator.utils.response.ResponseStatus;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PinSceneController extends Controller {
+public class PinSceneDetailController extends DetailController {
 
     PinService pinService = new PinService();
 
@@ -29,21 +29,16 @@ public class PinSceneController extends Controller {
     private TextField numberShearSection;
 
     public void printDoc(ActionEvent event) throws IOException {
-        Response response = pinService.write(getTextDataDetail(), getNumericalDataDetail(), getPinData());
-        if (response.getResponseStatus() == ResponseStatus.SUCCESS) {
-            switchFinishScene(event);
-        } else {
-            alertHandler.getErrorInputData(response.getDescription());
-        }
+        Response response = pinService.write(getTextDataDetail(), getNumericalDataDetail(), getData());
+        processResponse(response, event);
     }
-
 
     private void switchFinishScene(ActionEvent event) throws IOException {
         switchSceneByEvent(PATH_FINISH_SCENE, NAME_FINISH_SCENE, event);
     }
 
-    protected List<TextField> getPinData() {
-        ArrayList<TextField> pinData = new ArrayList<>();
+    protected List<Parent> getData() {
+        ArrayList<Parent> pinData = new ArrayList<>();
         pinData.add(INDEX_OUTER_DIAMETER, outerDiameter);
         pinData.add(INDEX_INTERNAL_DIAMETER, internalDiameter);
         pinData.add(INDEX_NUMBER_SHEAR_SECTION, numberShearSection);

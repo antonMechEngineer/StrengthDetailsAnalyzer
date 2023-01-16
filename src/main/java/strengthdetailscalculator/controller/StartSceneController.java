@@ -13,4 +13,8 @@ public class StartSceneController extends Controller {
         switchSceneByEvent(PATH_PIN_SCENE, NAME_PIN_SCENE,  event);
     }
 
+    public void switchToAxleScene(ActionEvent event) throws IOException {
+        switchSceneByEvent(PATH_AXLE_SCENE, NAME_AXLE_SCENE,  event);
+    }
+
 }
