@@ -5,12 +5,14 @@ import strengthdetailscalculator.entity.interfaces.ComplexDeformable;
 
 import java.util.HashMap;
 
-public interface ComplexConclusionGenerated {
+public interface VonMissesReportGenerated {
 
-    String SIGN = "${complexSign}";
-    String CONCLUSION = "${complexConclusion}";
+    String SIGN = "${vonMissesSign}";
+    String CONCLUSION = "${vonMissesConclusion}";
+    String VON_MISSES_STRESS = "${vonMissesStress}";
+    String VON_MISSES_SAFETY_FACTOR = "${vonMissesSafetyFactor}";
 
-    default void insertSComplexConclusion(HashMap<String, String> mapTemplate, ComplexDeformable complexDeformable){
+    default void insertVonMissesConclusion(HashMap<String, String> mapTemplate, ComplexDeformable complexDeformable){
         if (complexDeformable.getVonMissesSafetyFactor() > complexDeformable.getMinSafetyFactor()){
             mapTemplate.put(SIGN, StrengthCondition.SAFETY.sign);
             mapTemplate.put(CONCLUSION, StrengthCondition.SAFETY.conclusion);

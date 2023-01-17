@@ -10,14 +10,14 @@ import strengthdetailscalculator.utils.response.Response;
 import java.io.IOException;
 import java.util.List;
 
-public class AxleSceneDetailController extends PinSceneDetailController {
+public class AxleController extends PinController {
 
     AxleService axleService = new AxleService();
 
-    public static final Integer INDEX_NUMBER_LENGTH_SUPPORT = 3;
+    public static final Integer INDEX_NUMBER_SUPPORT_LENGTH = 3;
 
     @FXML
-    private TextField lengthSupport;
+    public TextField supportLength;
 
     public void printDoc(ActionEvent event) throws IOException {
         Response response = axleService.write(getTextDataDetail(), getNumericalDataDetail(), getAxleData());
@@ -30,7 +30,7 @@ public class AxleSceneDetailController extends PinSceneDetailController {
 
     protected List<Parent> getAxleData() {
         List<Parent> axleData = getData();
-        axleData.add(INDEX_INTERNAL_DIAMETER, lengthSupport);
+        axleData.add(INDEX_NUMBER_SUPPORT_LENGTH, supportLength);
         return axleData;
     }
 

@@ -63,6 +63,14 @@ public class InputDataManager implements ResponseCovered {
         return coverToResponse(resCheckPositiveNumericalData.getDescription() + resCheckZNumericalData.getDescription());
     }
 
+    public Response checkNullValue(Object object){
+        String error = "";
+        if (object == null) {
+            error = Object.class + " не может иметь пустое значение, выберите доступные значения из меню.";
+        }
+        return coverToResponse(error);
+    }
+
     public Response checkInputThreadProperties(Screw screw) {
         String error = "";
         if (screw.getInternalD() == 0 && screw.getMinD() == 0) {

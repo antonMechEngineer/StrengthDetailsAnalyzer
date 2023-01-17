@@ -1,9 +1,8 @@
 package strengthdetailscalculator.service;
 
 import javafx.scene.Parent;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import strengthdetailscalculator.controller.ScrewSceneDetailController;
 import strengthdetailscalculator.entity.Detail;
 import strengthdetailscalculator.entity.Screw;
 import strengthdetailscalculator.entity.enums.ScrewType;
@@ -35,15 +34,14 @@ public final class ScrewService extends DetailService implements FullChecked {
     @Override
     protected Response writeSpecifiedDetail(Detail detail, List<Parent> data) {
         Screw screw = build(detail, data);
-        Response errorResponseThreadProperties = inputDataManager.checkInputThreadProperties(screw);
-        if (errorResponseThreadProperties.getResponseStatus() == ResponseStatus.FAIL) {
-            return errorResponseThreadProperties;
+        Response resThreadProperties = inputDataManager.checkInputThreadProperties(screw);
+        if (resThreadProperties.getResponseStatus() == ResponseStatus.FAIL) {
+            return resThreadProperties;
         }
         documentWriter.writeScrew(screw);
         return new Response(ResponseStatus.SUCCESS);
 
     }
-
     @Override
     protected Response getResultChecking(List<TextField> textDetailData, List<TextField> numericalDetailData, List<Parent> data) {
         List<TextField> numericalScrewData = safetyCastToTextFields(data);
@@ -51,12 +49,9 @@ public final class ScrewService extends DetailService implements FullChecked {
     }
 
     private Screw build(Detail detail, List<Parent> data) {
-        ScrewType screwType = ScrewType.METRICAL;
-        CheckBox checkBoxTypeScrew = (CheckBox)data.get(ScrewSceneDetailController.INDEX_TYPE_SCREW);
+        ComboBox<ScrewType> screwTypeData = (ComboBox<ScrewType>) data.get(3);
+        ScrewType screwType = screwTypeData.getValue();
         List <TextField> numericalData = safetyCastToTextFields(data);
-        if (checkBoxTypeScrew.isSelected()) {
-            screwType = ScrewType.TRAPEZOIDAL;
-        }
         Double mainD = Double.valueOf(numericalData.get(0).getText());
         Double threadPitch = Double.valueOf(numericalData.get(1).getText());
         Double height = Double.valueOf(numericalData.get(2).getText());

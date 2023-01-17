@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="463.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="strengthdetailscalculator.controller.PinSceneDetailController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="463.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="strengthdetailscalculator.controller.PinController">
    <Label layoutX="73.0" layoutY="14.0" text="Введите характеристики штифта">
       <font>
          <Font size="20.0" />
@@ -57,10 +58,11 @@
    <TextField fx:id="code" layoutX="257.0" layoutY="117.0" prefHeight="25.0" prefWidth="171.0" />
    <TextField fx:id="outerDiameter" layoutX="257.0" layoutY="152.0" prefHeight="25.0" prefWidth="171.0" />
    <TextField fx:id="internalDiameter" layoutX="257.0" layoutY="189.0" prefHeight="25.0" prefWidth="171.0" />
-   <TextField fx:id="numberShearSection" layoutX="257.0" layoutY="224.0" prefHeight="25.0" prefWidth="171.0" />
+   <ComboBox fx:id="numberShearSection" layoutX="257.0" layoutY="224.0" onAction="#getNumberShearSection" onDragDetected="#getNumberShearSection" onHiding="#getNumberShearSection" onShown="#getNumberShearSection" prefHeight="25.0" prefWidth="171.0" promptText="Выберите число плоскостей среза" />
    <TextField fx:id="material" layoutX="257.0" layoutY="257.0" prefHeight="25.0" prefWidth="171.0" />
    <TextField fx:id="yieldStress" layoutX="257.0" layoutY="294.0" prefHeight="25.0" prefWidth="171.0" />
    <TextField fx:id="force" layoutX="257.0" layoutY="334.0" prefHeight="25.0" prefWidth="171.0" />
-   <Button layoutX="222.0" layoutY="384.0" mnemonicParsing="false" onAction="#printDoc" prefHeight="25.0" prefWidth="204.0" text="Раcчитать и получить отчёт" />
+   <Button fx:id="printButton" layoutX="222.0" layoutY="384.0" mnemonicParsing="false" onAction="#printDoc" disable="true" prefHeight="25.0" prefWidth="204.0" text="Раcчитать и получить отчёт" />
    <Button layoutX="50.0" layoutY="384.0" mnemonicParsing="false" onAction="#switchStartScene" prefHeight="25.0" prefWidth="111.0" text="В главное меню" />
+
 </AnchorPane>

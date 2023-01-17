@@ -31,6 +31,4 @@ public class Detail {
         this.force = Double.valueOf(numericalData.get(1).getText());
 
     }
-
-
 }

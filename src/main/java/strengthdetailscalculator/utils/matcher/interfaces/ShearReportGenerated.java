@@ -4,9 +4,12 @@ import strengthdetailscalculator.entity.enums.StrengthCondition;
 import strengthdetailscalculator.entity.interfaces.ShearDeformable;
 import java.util.HashMap;
 
-public interface ShearConclusionGenerated {
+public interface ShearReportGenerated {
     String SIGN = "${shearSign}";
     String CONCLUSION = "${shearConclusion}";
+    String SHEAR_AREA = "${shearArea}";
+    String SHEAR_STRESS = "${shearStress}";
+    String SHEAR_SAFETY_FACTOR = "${shearSafetyFactor}";
 
     default void insertShearConclusion(HashMap<String, String> mapTemplate, ShearDeformable shearDeformable){
         if (shearDeformable.getShearSafetyFactor() > shearDeformable.getMinSafetyFactor()){

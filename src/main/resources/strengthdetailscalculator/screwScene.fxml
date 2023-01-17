@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="481.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="strengthdetailscalculator.controller.ScrewSceneDetailController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="481.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="strengthdetailscalculator.controller.ScrewController">
    <Label layoutX="98.0" layoutY="14.0" text="Введите характеристики резьбы">
       <font>
          <Font size="20.0" />
@@ -61,12 +61,13 @@
    <TextField fx:id="material" layoutX="282.0" layoutY="257.0" prefHeight="25.0" prefWidth="171.0" />
    <TextField fx:id="yieldStress" layoutX="282.0" layoutY="294.0" prefHeight="25.0" prefWidth="171.0" />
    <TextField fx:id="force" layoutX="282.0" layoutY="334.0" prefHeight="25.0" prefWidth="171.0" />
-   <CheckBox fx:id="isTrapezoidal" alignment="TOP_LEFT" layoutX="84.0" layoutY="377.0" mnemonicParsing="false" text="Резьба трапецеидальная (по дефолту метрическая)" textAlignment="JUSTIFY">
+   <ComboBox fx:id="screwType" layoutX="282.0" layoutY="373.0" prefHeight="25.0" onAction="#getScrewType" onDragDetected="#getScrewType" onHiding="#getScrewType" onShown="#getScrewType"  prefWidth="171.0" promptText="Выберите тип резьбы" />
+   <Button fx:id="printButton" layoutX="246.0" layoutY="421.0" mnemonicParsing="false" onAction="#printDoc" disable="true" prefHeight="25.0" prefWidth="186.0" text="Раcчитать и получить отчёт" />
+   <Label layoutX="102.0" layoutY="44.0" prefHeight="25.0" prefWidth="313.0" text="Числовые характеристики вводятся в формате XXX.XXX" />
+   <Button layoutX="87.0" layoutY="421.0" mnemonicParsing="false" onAction="#switchStartScene" prefHeight="25.0" prefWidth="111.0" text="В главное меню" />
+   <Label layoutX="74.0" layoutY="376.0" text="Тип резьбы">
       <font>
          <Font size="14.0" />
       </font>
-   </CheckBox>
-   <Button layoutX="246.0" layoutY="421.0" mnemonicParsing="false" onAction="#printDoc" prefHeight="25.0" prefWidth="186.0" text="Раcчитать и получить отчёт" />
-   <Label layoutX="102.0" layoutY="44.0" prefHeight="25.0" prefWidth="313.0" text="Числовые характеристики вводятся в формате XXX.XXX" />
-   <Button layoutX="87.0" layoutY="421.0" mnemonicParsing="false" onAction="#switchStartScene" prefHeight="25.0" prefWidth="111.0" text="В главное меню" />
+   </Label>
 </AnchorPane>

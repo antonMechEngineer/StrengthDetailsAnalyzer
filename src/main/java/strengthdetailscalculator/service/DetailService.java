@@ -17,7 +17,6 @@ public abstract class DetailService implements ResponseCovered {
     protected final DocumentWriter documentWriter = new DocumentWriter();
     protected final InputDataManager inputDataManager = new InputDataManager();
 
-
     protected abstract Response writeSpecifiedDetail(Detail detail, List<Parent> data);
     protected abstract Response getResultChecking(List<TextField> textDetailData, List<TextField> numericalDetailData, List<Parent> data);
 

@@ -6,7 +6,7 @@ import java.util.HashMap;
 public abstract class DetailMatcher {
     protected static final String NAME = "${name}";
     protected static final String CODE = "${code}";
-    protected static final String YIELD_STRESS = "${sigmaT}";
+    protected static final String YIELD_STRESS = "${yieldStress}";
     protected static final String MATERIAL = "${material}";
     protected static final String FORCE = "${force}";
     protected static final String MIN_SAFETY_FACTOR = "${minSafetyFactor}";

@@ -3,6 +3,8 @@ package strengthdetailscalculator.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import strengthdetailscalculator.service.PinService;
 import strengthdetailscalculator.utils.response.Response;
@@ -11,9 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PinSceneDetailController extends DetailController {
+public class PinController extends DetailController {
 
-    PinService pinService = new PinService();
+    private PinService pinService = new PinService();
 
     public static final Integer INDEX_OUTER_DIAMETER = 0;
     public static final Integer INDEX_INTERNAL_DIAMETER = 1;
@@ -26,7 +28,10 @@ public class PinSceneDetailController extends DetailController {
     private TextField internalDiameter;
 
     @FXML
-    private TextField numberShearSection;
+    private ComboBox<String> numberShearSection;
+
+    @FXML
+    protected Button printButton;
 
     public void printDoc(ActionEvent event) throws IOException {
         Response response = pinService.write(getTextDataDetail(), getNumericalDataDetail(), getData());
@@ -44,4 +49,13 @@ public class PinSceneDetailController extends DetailController {
         pinData.add(INDEX_NUMBER_SHEAR_SECTION, numberShearSection);
         return pinData;
     }
+
+    @FXML
+    protected void getNumberShearSection(){
+        numberShearSection.getItems().addAll("1","2");
+        if (numberShearSection.getValue() != null) {
+            printButton.setDisable(false);
+        }
+    }
+
 }
