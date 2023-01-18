@@ -11,8 +11,8 @@ public interface BendingDeformable extends Safety {
         return calculateBendingMoment() / calculateBendingResistance();
     }
 
-    default Double calculateBendingSafetyFactor(Double force, Double yieldStress) {
-        return StressConditionType.AXIAL.stressRatio * yieldStress / calculateBendingStress();
+    default Double calculateBendingSafetyFactor() {
+        return StressConditionType.BENDING.stressRatio * getYieldStress() / calculateBendingStress();
     }
 
     Double getBendingSafetyFactor();

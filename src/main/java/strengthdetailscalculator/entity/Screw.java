@@ -38,11 +38,11 @@ public class Screw extends Detail implements ShearDeformable, AxialDeformable {
         this.minD = minD;
         clarifyLengthScrew();
         this.shearArea = calculateShearArea();
-        this.shearStress = calculateShearStress(force);
-        this.shearSafetyFactor = calculateShearSafetyFactor(force, yieldStress);
+        this.shearStress = calculateShearStress();
+        this.shearSafetyFactor = calculateShearSafetyFactor();
         this.axialArea = calculateAxialArea();
-        this.axialStress = calculateAxialStress(force);
-        this.axialSafetyFactor = calculateAxialSafetyFactor(force, yieldStress);
+        this.axialStress = calculateAxialStress();
+        this.axialSafetyFactor = calculateAxialSafetyFactor();
     }
 
     public Screw (Detail detail, Double mainD, Double threadPitch, Double height, ScrewType screwType, Double internalD, Double minD){
@@ -55,11 +55,11 @@ public class Screw extends Detail implements ShearDeformable, AxialDeformable {
         this.minD = minD;
         clarifyLengthScrew();
         this.shearArea = calculateShearArea();
-        this.shearStress = calculateShearStress(detail.getForce());
-        this.shearSafetyFactor = calculateShearSafetyFactor(detail.getForce(), detail.getYieldStress());
+        this.shearStress = calculateShearStress();
+        this.shearSafetyFactor = calculateShearSafetyFactor();
         this.axialArea = calculateAxialArea();
-        this.axialStress = calculateAxialStress(detail.getForce());
-        this.axialSafetyFactor = calculateAxialSafetyFactor(detail.getForce(), detail.getYieldStress());
+        this.axialStress = calculateAxialStress();
+        this.axialSafetyFactor = calculateAxialSafetyFactor();
     }
     @Override
     public Double calculateShearArea() {

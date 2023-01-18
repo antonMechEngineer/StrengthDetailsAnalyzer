@@ -8,11 +8,11 @@ public interface ShearDeformable extends Safety {
 
     Double getShearSafetyFactor();
 
-    default Double calculateShearStress(Double force) {
-        return force / calculateShearArea();
+    default Double calculateShearStress() {
+        return getForce() / calculateShearArea();
     }
 
-    default Double calculateShearSafetyFactor(Double force, Double yieldStress) {
-        return StressConditionType.SHEAR.stressRatio * yieldStress / calculateShearStress(force);
+    default Double calculateShearSafetyFactor() {
+        return StressConditionType.SHEAR.stressRatio * getYieldStress() / calculateShearStress();
     }
 }

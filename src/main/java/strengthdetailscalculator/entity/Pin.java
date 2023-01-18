@@ -26,8 +26,8 @@ public class Pin extends Detail implements ShearDeformable {
         this.internalDiameter = internalDiameter;
         this.numberShearSection = numberShearSection;
         this.shearArea = calculateShearArea();
-        this.shearStress = calculateShearStress(force);
-        this.shearSafetyFactor = calculateShearSafetyFactor(force, yieldStress);
+        this.shearStress = calculateShearStress();
+        this.shearSafetyFactor = calculateShearSafetyFactor();
     }
 
     public Pin(Detail detail, Double outerDiameter, Double internalDiameter, Double numberShearSection) {
@@ -36,8 +36,18 @@ public class Pin extends Detail implements ShearDeformable {
         this.internalDiameter = internalDiameter;
         this.numberShearSection = numberShearSection;
         this.shearArea = calculateShearArea();
-        this.shearStress = calculateShearStress(detail.getForce());
-        this.shearSafetyFactor = calculateShearSafetyFactor(detail.getForce(), detail.getYieldStress());
+        this.shearStress = calculateShearStress();
+        this.shearSafetyFactor = calculateShearSafetyFactor();
+    }
+
+    public Pin(Pin pin, Double numberShearSection){
+        super(pin.getName(), pin.getCode(), pin.getMaterial(), pin.getYieldStress(), pin.getForce());
+        this.internalDiameter = pin.getInternalDiameter();
+        this.outerDiameter = pin.getOuterDiameter();
+        this.numberShearSection = numberShearSection;
+        this.shearArea = calculateShearArea();
+        this.shearStress = calculateShearStress();
+        this.shearSafetyFactor = calculateShearSafetyFactor();
     }
 
     @Override

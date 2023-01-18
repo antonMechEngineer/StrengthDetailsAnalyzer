@@ -52,7 +52,7 @@ public class PinController extends DetailController {
 
     @FXML
     protected void getNumberShearSection(){
-        numberShearSection.getItems().addAll("1","2");
+        numberShearSection.getItems().addAll("1","2","3","4");
         if (numberShearSection.getValue() != null) {
             printButton.setDisable(false);
         }

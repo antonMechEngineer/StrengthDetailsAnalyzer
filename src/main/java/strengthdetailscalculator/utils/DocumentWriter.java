@@ -27,24 +27,21 @@ public class DocumentWriter {
     AxleMatcher axleMatcher = new AxleMatcher();
 
     public void writeScrew(Screw screw) {
-        HashMap<String, String> mapTemplate = screwMatcher.getMapTemplateScrew(screw);
-        Docx docx = new Docx(PATH_SCREW_TMPL);
-        printDoc(docx, mapTemplate);
-        docx.save(PATH_SCREW_RES);
+        write(screwMatcher.getMapTemplateScrew(screw), PATH_SCREW_TMPL, PATH_SCREW_RES);
     }
 
     public void writePin(Pin pin) {
-        HashMap<String, String> mapTemplate = pinMatcher.getMapTemplatePin(pin);
-        Docx docx = new Docx(PATH_PIN_TMPL);
-        printDoc(docx, mapTemplate);
-        docx.save(PATH_PIN_RES);
+        write(pinMatcher.getMapTemplatePin(pin), PATH_PIN_TMPL, PATH_PIN_RES);
     }
 
     public void writeAxle(Axle axle) {
-        HashMap<String, String> mapTemplate = axleMatcher.getMapTemplateAxle(axle);
-        Docx docx = new Docx(PATH_AXLE_TMPL);
+        write(axleMatcher.getMapTemplateAxle(axle), PATH_AXLE_TMPL, PATH_AXLE_RES);
+    }
+
+    private void write(HashMap<String, String> mapTemplate, String pathTemp, String pathRes){
+        Docx docx = new Docx(pathTemp);
         printDoc(docx, mapTemplate);
-        docx.save(PATH_AXLE_RES);
+        docx.save(pathRes);
     }
 
     private void printDoc(Docx docx, HashMap<String, String> mapTemplate){

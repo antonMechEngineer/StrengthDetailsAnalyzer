@@ -26,10 +26,10 @@ public class Axle extends Pin implements BendingDeformable, ComplexDeformable {
         this.supportLength = supportLength;
         this.bendingResistance = calculateBendingResistance();
         this.bendingStress = calculateBendingStress();
-        this.bendingSafetyFactor = calculateBendingSafetyFactor(force, yieldStress);
+        this.bendingSafetyFactor = calculateBendingSafetyFactor();
         this.bendingMoment = calculateBendingMoment();
-        this.vonMissesStress = calculateVonMissesStress(force);
-        this.vonMissesSafetyFactor = calculateVonMissesSafetyFactor(force, yieldStress);
+        this.vonMissesStress = calculateVonMissesStress();
+        this.vonMissesSafetyFactor = calculateVonMissesSafetyFactor();
     }
 
     public Axle(Pin pin, Double supportLength) {
@@ -38,15 +38,15 @@ public class Axle extends Pin implements BendingDeformable, ComplexDeformable {
         this.supportLength = supportLength;
         this.bendingResistance = calculateBendingResistance();
         this.bendingStress = calculateBendingStress();
-        this.bendingSafetyFactor = calculateBendingSafetyFactor(pin.getForce(), pin.getYieldStress());
+        this.bendingSafetyFactor = calculateBendingSafetyFactor();
         this.bendingMoment = calculateBendingMoment();
-        this.vonMissesStress = calculateVonMissesStress(pin.getForce());
-        this.vonMissesSafetyFactor = calculateVonMissesSafetyFactor(pin.getForce(), pin.getYieldStress());
+        this.vonMissesStress = calculateVonMissesStress();
+        this.vonMissesSafetyFactor = calculateVonMissesSafetyFactor();
     }
 
     @Override
-    public Double calculateVonMissesStress(Double force) {
-        return pow((pow(calculateBendingStress(), 2) + 3 * pow(calculateShearStress(force), 2)), 0.5);
+    public Double calculateVonMissesStress() {
+        return pow((pow(calculateBendingStress(), 2) + 3 * pow(calculateShearStress(), 2)), 0.5);
     }
 
     @Override
@@ -66,6 +66,12 @@ public class Axle extends Pin implements BendingDeformable, ComplexDeformable {
             bendingMoment = force * supportLength;
         } else if (numberShearSection == 2d) {
             bendingMoment = force * supportLength / 4;
+        }
+        else if (numberShearSection == 3d) {
+            bendingMoment = 3 * force * supportLength / 64;
+        }
+        else if (numberShearSection == 4d) {
+            bendingMoment = 3 * force * supportLength / 128;
         }
         return bendingMoment;
     }

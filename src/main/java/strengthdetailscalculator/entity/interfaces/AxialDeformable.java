@@ -5,12 +5,12 @@ import strengthdetailscalculator.entity.enums.StressConditionType;
 public interface AxialDeformable extends Safety {
     Double calculateAxialArea();
 
-    default Double calculateAxialStress(Double force) {
-        return force / calculateAxialArea();
+    default Double calculateAxialStress() {
+        return getForce() / calculateAxialArea();
     }
 
-    default Double calculateAxialSafetyFactor(Double force, Double yieldStress) {
-        return StressConditionType.AXIAL.stressRatio * yieldStress / calculateAxialStress(force);
+    default Double calculateAxialSafetyFactor() {
+        return StressConditionType.AXIAL.stressRatio * getYieldStress() / calculateAxialStress();
     }
 
     Double getAxialSafetyFactor();

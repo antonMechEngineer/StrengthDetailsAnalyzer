@@ -1,3 +1,5 @@
+package strengthdetailscalculator.entity;
+
 import junit.framework.TestCase;
 import strengthdetailscalculator.entity.Detail;
 

@@ -3,10 +3,10 @@ package strengthdetailscalculator.entity.interfaces;
 import strengthdetailscalculator.entity.enums.StressConditionType;
 
 public interface ComplexDeformable extends BendingDeformable, ShearDeformable {
-     Double calculateVonMissesStress(Double force);
+     Double calculateVonMissesStress();
 
-    default Double calculateVonMissesSafetyFactor(Double force, Double yieldStress) {
-        return StressConditionType.VON_MISSES.stressRatio * yieldStress / calculateVonMissesStress(force);
+    default Double calculateVonMissesSafetyFactor() {
+        return StressConditionType.VON_MISSES.stressRatio * getYieldStress() / calculateVonMissesStress();
     }
 
     Double getVonMissesSafetyFactor();
