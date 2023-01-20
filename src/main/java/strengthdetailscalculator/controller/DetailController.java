@@ -3,7 +3,6 @@ package strengthdetailscalculator.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -43,7 +42,7 @@ public abstract class DetailController extends Controller {
 
     public abstract void printDoc(ActionEvent event) throws IOException;
 
-    protected abstract List<Parent> getData();
+    protected abstract List<String> getData();
 
     protected void switchScene(String pathScene, String nameScene, Stage currentStage) throws IOException {
         currentStage.setTitle(nameScene);
@@ -61,19 +60,19 @@ public abstract class DetailController extends Controller {
         switchSceneByEvent(PATH_FINISH_SCENE, NAME_FINISH_SCENE, event);
     }
 
-    protected List<TextField> getTextDataDetail(){
-        ArrayList<TextField> textDataDetail = new ArrayList<>();
-        textDataDetail.add(INDEX_NAME, name);
-        textDataDetail.add(INDEX_CODE, code);
-        textDataDetail.add(INDEX_MATERIAL, material);
+    protected List<String> getDetailData(){
+        ArrayList<String> textDataDetail = new ArrayList<>();
+        textDataDetail.add(INDEX_NAME, name.getText());
+        textDataDetail.add(INDEX_CODE, code.getText());
+        textDataDetail.add(INDEX_MATERIAL, material.getText());
         return  textDataDetail;
     }
 
-    protected List<TextField> getNumericalDataDetail(){
-        ArrayList<TextField> numericalDataDetail = new ArrayList<>();
-        numericalDataDetail.add(INDEX_YIELD_STRESS, yieldStress);
-        numericalDataDetail.add(INDEX_FORCE, force);
-        return List.of(yieldStress, force);
+    protected List<String> getNumericalDataDetail(){
+        ArrayList<String> numericalDataDetail = new ArrayList<>();
+        numericalDataDetail.add(INDEX_YIELD_STRESS, yieldStress.getText());
+        numericalDataDetail.add(INDEX_FORCE, force.getText());
+        return numericalDataDetail;
     }
 
     protected void processResponse(Response response, ActionEvent event) throws IOException {

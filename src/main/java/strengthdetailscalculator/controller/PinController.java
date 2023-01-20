@@ -2,7 +2,6 @@ package strengthdetailscalculator.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -34,7 +33,7 @@ public class PinController extends DetailController {
     protected Button printButton;
 
     public void printDoc(ActionEvent event) throws IOException {
-        Response response = pinService.write(getTextDataDetail(), getNumericalDataDetail(), getData());
+        Response response = pinService.write(getDetailData(), getNumericalDataDetail(), getData());
         processResponse(response, event);
     }
 
@@ -42,20 +41,19 @@ public class PinController extends DetailController {
         switchSceneByEvent(PATH_FINISH_SCENE, NAME_FINISH_SCENE, event);
     }
 
-    protected List<Parent> getData() {
-        ArrayList<Parent> pinData = new ArrayList<>();
-        pinData.add(INDEX_OUTER_DIAMETER, outerDiameter);
-        pinData.add(INDEX_INTERNAL_DIAMETER, internalDiameter);
-        pinData.add(INDEX_NUMBER_SHEAR_SECTION, numberShearSection);
+    protected List<String> getData() {
+        ArrayList<String> pinData = new ArrayList<>();
+        pinData.add(INDEX_OUTER_DIAMETER, outerDiameter.getText());
+        pinData.add(INDEX_INTERNAL_DIAMETER, internalDiameter.getText());
+        pinData.add(INDEX_NUMBER_SHEAR_SECTION, numberShearSection.getValue());
         return pinData;
     }
 
     @FXML
-    protected void getNumberShearSection(){
-        numberShearSection.getItems().addAll("1","2","3","4");
+    protected void getNumberShearSection() {
+        numberShearSection.getItems().addAll("1", "2", "3", "4");
         if (numberShearSection.getValue() != null) {
             printButton.setDisable(false);
         }
     }
-
 }

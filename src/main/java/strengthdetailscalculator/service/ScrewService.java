@@ -1,23 +1,21 @@
 package strengthdetailscalculator.service;
 
-import javafx.scene.Parent;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import strengthdetailscalculator.controller.ScrewController;
 import strengthdetailscalculator.entity.Detail;
 import strengthdetailscalculator.entity.Screw;
 import strengthdetailscalculator.entity.enums.ScrewType;
-import strengthdetailscalculator.service.interfaces.FullChecked;
 import strengthdetailscalculator.utils.response.Response;
 import strengthdetailscalculator.utils.response.ResponseStatus;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
-public final class ScrewService extends DetailService implements FullChecked {
+import static strengthdetailscalculator.controller.ScrewController.*;
+import static strengthdetailscalculator.entity.enums.ScrewType.METRICAL;
+import static strengthdetailscalculator.entity.enums.ScrewType.TRAPEZOIDAL;
+
+public final class ScrewService extends DetailService {
     private static final Integer INDEX_MID_D = 0;
     private static final Integer INDEX_INTERNAL_D = 1;
     private static final Integer INDEX_MIN_D = 2;
@@ -32,7 +30,7 @@ public final class ScrewService extends DetailService implements FullChecked {
     }
 
     @Override
-    protected Response writeSpecifiedDetail(Detail detail, List<Parent> data) {
+    protected Response writeSpecifiedDetail(Detail detail, List<String> data) {
         Screw screw = build(detail, data);
         Response resThreadProperties = inputDataManager.checkInputThreadProperties(screw);
         if (resThreadProperties.getResponseStatus() == ResponseStatus.FAIL) {
@@ -42,19 +40,25 @@ public final class ScrewService extends DetailService implements FullChecked {
         return new Response(ResponseStatus.SUCCESS);
 
     }
+
     @Override
-    protected Response getResultChecking(List<TextField> textDetailData, List<TextField> numericalDetailData, List<Parent> data) {
-        List<TextField> numericalScrewData = safetyCastToTextFields(data);
-        return fullCheckDetailData(textDetailData, numericalDetailData, numericalScrewData);
+    protected Response checkData(List<String> data) {
+        List<String> numericalData = List.of(data.get(INDEX_MAIN_D), data.get(INDEX_THREAD_PITCH), data.get(INDEX_HEIGHT));
+        Response response = inputDataManager.checkPositiveNumericalData(numericalData);
+        return response;
     }
 
-    private Screw build(Detail detail, List<Parent> data) {
-        ComboBox<ScrewType> screwTypeData = (ComboBox<ScrewType>) data.get(3);
-        ScrewType screwType = screwTypeData.getValue();
-        List <TextField> numericalData = safetyCastToTextFields(data);
-        Double mainD = Double.valueOf(numericalData.get(0).getText());
-        Double threadPitch = Double.valueOf(numericalData.get(1).getText());
-        Double height = Double.valueOf(numericalData.get(2).getText());
+    @Override
+    protected List<String> prepareData(List<String> data) {
+       List<String> processedData = inputDataManager.replaceCommasWithDots(data);
+        return processedData;
+    }
+
+    private Screw build(Detail detail, List<String> data) {
+        ScrewType screwType = getScrewType(data.get(ScrewController.INDEX_TYPE_SCREW));
+        Double mainD = Double.valueOf(data.get(0));
+        Double threadPitch = Double.valueOf(data.get(1));
+        Double height = Double.valueOf(data.get(2));
         Screw screw = new Screw(detail,
                 mainD, threadPitch, height, screwType,
                 getInternalD(mainD, threadPitch, screwType),
@@ -131,4 +135,10 @@ public final class ScrewService extends DetailService implements FullChecked {
         return screwLine;
     }
 
+    private ScrewType getScrewType(String name) {
+        if (name.equals(TRAPEZOIDAL)) {
+            return TRAPEZOIDAL;
+        }
+        return METRICAL;
+    }
 }

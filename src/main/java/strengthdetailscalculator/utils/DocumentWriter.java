@@ -38,13 +38,13 @@ public class DocumentWriter {
         write(axleMatcher.getMapTemplateAxle(axle), PATH_AXLE_TMPL, PATH_AXLE_RES);
     }
 
-    private void write(HashMap<String, String> mapTemplate, String pathTemp, String pathRes){
+    private void write(HashMap<String, String> mapTemplate, String pathTemp, String pathRes) {
         Docx docx = new Docx(pathTemp);
         printDoc(docx, mapTemplate);
         docx.save(pathRes);
     }
 
-    private void printDoc(Docx docx, HashMap<String, String> mapTemplate){
+    private void printDoc(Docx docx, HashMap<String, String> mapTemplate) {
         docx.setVariablePattern(new VariablePattern("${", "}"));
         List<String> findVariables = docx.findVariables();
         Variables var = new Variables();

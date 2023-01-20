@@ -1,7 +1,9 @@
 package strengthdetailscalculator.utils.response;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+@EqualsAndHashCode
 @Getter
 public class Response {
     private final ResponseStatus responseStatus;

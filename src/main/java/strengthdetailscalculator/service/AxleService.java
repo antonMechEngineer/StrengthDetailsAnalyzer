@@ -1,7 +1,5 @@
 package strengthdetailscalculator.service;
 
-import javafx.scene.Parent;
-import javafx.scene.control.TextField;
 import strengthdetailscalculator.controller.AxleController;
 import strengthdetailscalculator.entity.Axle;
 import strengthdetailscalculator.entity.Detail;
@@ -16,22 +14,30 @@ public final class AxleService extends PinService {
 
     protected final DocumentWriter documentWriter = new DocumentWriter();
 
-    protected Response writeSpecifiedDetail(Detail detail, List<Parent> data){
+    @Override
+    protected Response writeSpecifiedDetail(Detail detail, List<String> data){
         Axle axle = build(detail, data);
-        Response resAxleProperties = inputDataManager.checkInputAxleProperties(axle);
+        Response resAxleProperties = inputDataManager.checkNonZeroNumericalData(List.of(axle.getSupportLength().toString()));
         if (resAxleProperties.getResponseStatus() == ResponseStatus.FAIL) {
             return resAxleProperties;
         }
         documentWriter.writeAxle(axle);
         return new Response(ResponseStatus.SUCCESS);
-
-
     }
 
-    protected Axle build(Detail detail, List<Parent> data){
+    @Override
+    protected Axle build(Detail detail, List<String> data){
         Pin pin = super.build(detail, data) ;
-        TextField supportLengthTextField = (TextField) data.get(AxleController.INDEX_NUMBER_SUPPORT_LENGTH);
-        return new Axle(pin, Double.valueOf(supportLengthTextField.getText()));
+        String supportLength =  data.get(AxleController.INDEX_NUMBER_SUPPORT_LENGTH);
+        return new Axle(pin, Double.valueOf(supportLength));
     }
+
+    @Override
+    protected Response checkData(List<String> data) {
+        Response pinResponse = super.checkData(data);
+        Response checkLength = inputDataManager.checkPositiveNumericalData(List.of(data.get(AxleController.INDEX_NUMBER_SUPPORT_LENGTH)));
+        return coverToResponse(pinResponse.getDescription() + checkLength.getDescription());
+    }
+
 
 }

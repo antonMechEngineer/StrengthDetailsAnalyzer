@@ -18,4 +18,6 @@ module strengthdetailscalculator {
     exports strengthdetailscalculator.entity;
     exports strengthdetailscalculator.entity.enums;
     opens strengthdetailscalculator.controller to javafx.fxml;
+    exports strengthdetailscalculator.utils;
+    exports strengthdetailscalculator.utils.response;
 }
