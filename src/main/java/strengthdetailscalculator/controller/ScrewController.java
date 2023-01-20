@@ -17,7 +17,7 @@ import static strengthdetailscalculator.entity.enums.ScrewType.TRAPEZOIDAL;
 
 public class ScrewController extends DetailController {
 
-    ScrewService screwService = new ScrewService();
+    ScrewService screwService = new ScrewService(documentWriter, inputDataManager);
     public static final Integer INDEX_MAIN_D = 0;
     public static final Integer INDEX_THREAD_PITCH = 1;
     public static final Integer INDEX_HEIGHT = 2;

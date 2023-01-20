@@ -1,5 +1,6 @@
 package strengthdetailscalculator.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,6 +8,7 @@ import strengthdetailscalculator.entity.interfaces.ShearDeformable;
 import static java.lang.Math.PI;
 import static java.lang.Math.pow;
 
+@EqualsAndHashCode
 @Getter
 @Setter
 @ToString
@@ -16,6 +18,7 @@ public class Pin extends Detail implements ShearDeformable {
     protected final Double internalDiameter;
     protected final Double numberShearSection;
     protected final Double shearArea;
+
     protected final Double shearStress;
     protected final Double shearSafetyFactor;
 

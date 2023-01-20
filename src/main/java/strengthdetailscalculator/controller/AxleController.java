@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AxleController extends PinController {
 
-    private final AxleService axleService = new AxleService();
+    private final AxleService axleService = new AxleService(documentWriter, inputDataManager);
     public static final Integer INDEX_NUMBER_SUPPORT_LENGTH = 3;
 
     @FXML

@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import strengthdetailscalculator.StrengthDetailsCalculator;
 import strengthdetailscalculator.utils.AlertHandler;
+import strengthdetailscalculator.utils.DocumentWriter;
+import strengthdetailscalculator.utils.InputDataManager;
 import strengthdetailscalculator.utils.response.Response;
 import strengthdetailscalculator.utils.response.ResponseStatus;
 
@@ -18,6 +20,9 @@ import java.util.List;
 public abstract class DetailController extends Controller {
 
     AlertHandler alertHandler = new AlertHandler();
+    protected final DocumentWriter documentWriter = new DocumentWriter();
+    protected final InputDataManager inputDataManager = new InputDataManager();
+
 
     public static final Integer INDEX_NAME = 0;
     public static final Integer INDEX_CODE = 1;

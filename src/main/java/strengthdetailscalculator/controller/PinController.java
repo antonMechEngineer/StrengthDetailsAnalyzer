@@ -14,7 +14,7 @@ import java.util.List;
 
 public class PinController extends DetailController {
 
-    private PinService pinService = new PinService();
+    private PinService pinService = new PinService(documentWriter, inputDataManager);
 
     public static final Integer INDEX_OUTER_DIAMETER = 0;
     public static final Integer INDEX_INTERNAL_DIAMETER = 1;

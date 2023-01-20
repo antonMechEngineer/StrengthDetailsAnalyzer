@@ -4,6 +4,8 @@ import strengthdetailscalculator.controller.ScrewController;
 import strengthdetailscalculator.entity.Detail;
 import strengthdetailscalculator.entity.Screw;
 import strengthdetailscalculator.entity.enums.ScrewType;
+import strengthdetailscalculator.utils.DocumentWriter;
+import strengthdetailscalculator.utils.InputDataManager;
 import strengthdetailscalculator.utils.response.Response;
 import strengthdetailscalculator.utils.response.ResponseStatus;
 
@@ -24,7 +26,8 @@ public final class ScrewService extends DetailService {
     private static final String DATA_PATH_METRICAL_SCREW = "src/main/resources/data/screw/metricalScrewData.csv";
     private static final String DATA_PATH_TRAPEZOIDAL_SCREW = "src/main/resources/data/screw/trapezoidalScrewData.csv";
 
-    public ScrewService() {
+    public ScrewService(DocumentWriter documentWriter, InputDataManager inputDataManager) {
+        super(documentWriter, inputDataManager);
         loadDataFromCSVFile(DATA_PATH_METRICAL_SCREW, metricalScrewData);
         loadDataFromCSVFile(DATA_PATH_TRAPEZOIDAL_SCREW, trapezoidalScrewData);
     }

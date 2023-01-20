@@ -5,6 +5,7 @@ import strengthdetailscalculator.entity.Axle;
 import strengthdetailscalculator.entity.Detail;
 import strengthdetailscalculator.entity.Pin;
 import strengthdetailscalculator.utils.DocumentWriter;
+import strengthdetailscalculator.utils.InputDataManager;
 import strengthdetailscalculator.utils.response.Response;
 import strengthdetailscalculator.utils.response.ResponseStatus;
 
@@ -12,8 +13,9 @@ import java.util.List;
 
 public final class AxleService extends PinService {
 
-    protected final DocumentWriter documentWriter = new DocumentWriter();
-
+    public AxleService(DocumentWriter documentWriter, InputDataManager inputDataManager) {
+        super(documentWriter, inputDataManager);
+    }
     @Override
     protected Response writeSpecifiedDetail(Detail detail, List<String> data){
         Axle axle = build(detail, data);

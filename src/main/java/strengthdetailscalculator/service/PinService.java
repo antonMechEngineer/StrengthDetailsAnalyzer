@@ -3,6 +3,8 @@ package strengthdetailscalculator.service;
 import strengthdetailscalculator.entity.Detail;
 import strengthdetailscalculator.entity.Pin;
 import strengthdetailscalculator.service.interfaces.DetailChecked;
+import strengthdetailscalculator.utils.DocumentWriter;
+import strengthdetailscalculator.utils.InputDataManager;
 import strengthdetailscalculator.utils.response.Response;
 import strengthdetailscalculator.utils.response.ResponseStatus;
 
@@ -12,6 +14,11 @@ import static strengthdetailscalculator.controller.PinController.*;
 
 @SuppressWarnings("UnnecessaryLocalVariable")
 public class PinService extends DetailService implements DetailChecked {
+
+
+    public PinService(DocumentWriter documentWriter, InputDataManager inputDataManager) {
+        super(documentWriter, inputDataManager);
+    }
 
     @Override
     protected Response writeSpecifiedDetail(Detail detail, List<String> data) {
@@ -30,9 +37,9 @@ public class PinService extends DetailService implements DetailChecked {
 
     @Override
     protected Response checkData(List<String> data) {
-        Response responsePinData0 = inputDataManager.checkMainNumericalData(List.of(data.get(INDEX_INTERNAL_DIAMETER)));
-        Response responsePinData1 = inputDataManager.checkNonZeroNumericalData(List.of(data.get(INDEX_OUTER_DIAMETER)));
-        return coverToResponse(responsePinData0.getDescription() + responsePinData1.getDescription());
+        Response resPinData0 = inputDataManager.checkMainNumericalData(List.of(data.get(INDEX_INTERNAL_DIAMETER)));
+        Response resPinData1 = inputDataManager.checkNonZeroNumericalData(List.of(data.get(INDEX_OUTER_DIAMETER)));
+        return coverToResponse(resPinData0.getDescription() + resPinData1.getDescription());
     }
 
     @Override

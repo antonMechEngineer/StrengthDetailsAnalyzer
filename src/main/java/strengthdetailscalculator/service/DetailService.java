@@ -12,8 +12,14 @@ import java.util.List;
 
 public abstract class DetailService implements ResponseCovered, DetailChecked {
 
-    protected final DocumentWriter documentWriter = new DocumentWriter();
-    protected final InputDataManager inputDataManager = new InputDataManager();
+    protected final DocumentWriter documentWriter;
+    protected final InputDataManager inputDataManager;
+
+    public DetailService(DocumentWriter documentWriter, InputDataManager inputDataManager) {
+        this.documentWriter = documentWriter;
+        this.inputDataManager = inputDataManager;
+    }
+
     protected abstract Response writeSpecifiedDetail(Detail detail, List<String> data);
     protected abstract Response checkData(List<String> data);
     protected abstract List<String> prepareData(List<String> data);
