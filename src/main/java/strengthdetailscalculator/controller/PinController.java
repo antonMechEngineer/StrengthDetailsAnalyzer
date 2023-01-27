@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import lombok.Setter;
 import strengthdetailscalculator.service.PinService;
 import strengthdetailscalculator.utils.response.Response;
 
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Setter
 public class PinController extends DetailController {
 
     private PinService pinService = new PinService(documentWriter, inputDataManager);
@@ -32,6 +34,7 @@ public class PinController extends DetailController {
     @FXML
     protected Button printButton;
 
+    @Override
     public void printDoc(ActionEvent event) throws IOException {
         Response response = pinService.write(getDetailData(), getNumericalDataDetail(), getData());
         processResponse(response, event);
@@ -40,6 +43,7 @@ public class PinController extends DetailController {
     private void switchFinishScene(ActionEvent event) throws IOException {
         switchSceneByEvent(PATH_FINISH_SCENE, NAME_FINISH_SCENE, event);
     }
+
 
     protected List<String> getData() {
         ArrayList<String> pinData = new ArrayList<>();

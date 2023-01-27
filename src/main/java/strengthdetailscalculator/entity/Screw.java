@@ -1,5 +1,6 @@
 package strengthdetailscalculator.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,6 +10,7 @@ import strengthdetailscalculator.entity.interfaces.ShearDeformable;
 import static java.lang.Math.PI;
 import static java.lang.Math.pow;
 
+@EqualsAndHashCode
 @Getter
 @Setter
 @ToString
@@ -27,23 +29,6 @@ public class Screw extends Detail implements ShearDeformable, AxialDeformable {
     private final Double axialStress;
     private final Double axialSafetyFactor;
 
-    public Screw(String name, String code, String material, Double yieldStress, Double force, Double mainD,
-            Double threadPitch, Double height, ScrewType screwType, Double internalD, Double minD) {
-        super(name, code, material, yieldStress, force);
-        this.mainD = mainD;
-        this.threadPitch = threadPitch;
-        this.height = height;
-        this.screwType = screwType;
-        this.internalD = internalD;
-        this.minD = minD;
-        clarifyLengthScrew();
-        this.shearArea = calculateShearArea();
-        this.shearStress = calculateShearStress();
-        this.shearSafetyFactor = calculateShearSafetyFactor();
-        this.axialArea = calculateAxialArea();
-        this.axialStress = calculateAxialStress();
-        this.axialSafetyFactor = calculateAxialSafetyFactor();
-    }
 
     public Screw (Detail detail, Double mainD, Double threadPitch, Double height, ScrewType screwType, Double internalD, Double minD){
         super(detail.getName(), detail.getCode(), detail.getMaterial(), detail.getYieldStress(), detail.getForce());

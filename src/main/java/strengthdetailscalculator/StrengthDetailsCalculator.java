@@ -14,7 +14,7 @@ public class StrengthDetailsCalculator extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(StrengthDetailsCalculator.class.getResource("startScene.fxml"));
-        Scene scene = new Scene(root, 300, 300);
+        Scene scene = new Scene(root);
         stage.setTitle("Расчёт прочности стандартных деталей");
         stage.setScene(scene);
         stage.show();

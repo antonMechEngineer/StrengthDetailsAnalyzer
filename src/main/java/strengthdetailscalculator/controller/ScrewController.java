@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import lombok.Setter;
 import strengthdetailscalculator.service.ScrewService;
 import strengthdetailscalculator.utils.response.Response;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 import static strengthdetailscalculator.entity.enums.ScrewType.METRICAL;
 import static strengthdetailscalculator.entity.enums.ScrewType.TRAPEZOIDAL;
-
+@Setter
 public class ScrewController extends DetailController {
 
     ScrewService screwService = new ScrewService(documentWriter, inputDataManager);
@@ -38,6 +39,7 @@ public class ScrewController extends DetailController {
     @FXML
     private Button printButton;
 
+    @Override
     public void printDoc(ActionEvent event) throws IOException {
         Response response = screwService.write(getDetailData(), getNumericalDataDetail(), getData());
         processResponse(response, event);
@@ -53,7 +55,7 @@ public class ScrewController extends DetailController {
     }
 
     @FXML
-    public void getScrewType() {
+    private void getScrewType() {
         screwType.getItems().addAll(METRICAL.name, TRAPEZOIDAL.name);
         if (screwType.getValue() != null) {
             printButton.setDisable(false);

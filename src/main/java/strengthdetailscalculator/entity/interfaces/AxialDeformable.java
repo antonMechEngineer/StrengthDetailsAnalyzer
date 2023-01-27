@@ -1,20 +1,22 @@
 package strengthdetailscalculator.entity.interfaces;
 
-import strengthdetailscalculator.entity.enums.StressConditionType;
+import static strengthdetailscalculator.entity.enums.StressConditionType.AXIAL;
 
 public interface AxialDeformable extends Safety {
-    Double calculateAxialArea();
+    Double getAxialSafetyFactor();
+
+    Double getMinSafetyFactor();
+
+    Double getAxialStress();
 
     default Double calculateAxialStress() {
         return getForce() / calculateAxialArea();
     }
 
     default Double calculateAxialSafetyFactor() {
-        return StressConditionType.AXIAL.stressRatio * getYieldStress() / calculateAxialStress();
+        return AXIAL.stressRatio * getYieldStress() / calculateAxialStress();
     }
 
-    Double getAxialSafetyFactor();
-
-    Double getMinSafetyFactor();
+    Double calculateAxialArea();
 
 }

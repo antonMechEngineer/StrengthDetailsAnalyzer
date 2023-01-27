@@ -1,17 +1,18 @@
 package strengthdetailscalculator.utils;
 
 import org.junit.jupiter.api.Test;
-import strengthdetailscalculator.entity.DetailTest;
+import strengthdetailscalculator.entity.Detail;
 import strengthdetailscalculator.entity.Screw;
 import strengthdetailscalculator.entity.enums.ScrewType;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static strengthdetailscalculator.utils.response.ResponseStatus.FAIL;
 import static strengthdetailscalculator.utils.response.ResponseStatus.SUCCESS;
 
-class InputDataManagerTest extends DetailTest {
-
+class InputDataManagerTest {
+    private final Detail detail = new Detail("name", "code", "сталь", 240d, 1000d);
     InputDataManager inputDataManager = new InputDataManager();
     @Test
     void checkTextData() {
@@ -64,7 +65,7 @@ class InputDataManagerTest extends DetailTest {
     @Test
     void checkInputThreadProperties() {
         Screw correctScrew = new Screw(detail, 10d, 1d, 7d, ScrewType.METRICAL, 8.917, 8.773);
-        Screw unCorrectScrew = new Screw(detail, 10d, 5d, 7d, ScrewType.METRICAL, 8.917, 8.773);
+        Screw unCorrectScrew = new Screw(detail, 10d, 5d, 7d, ScrewType.METRICAL, 0d, 0d);
         assertEquals(SUCCESS, inputDataManager.checkInputThreadProperties(correctScrew) .getResponseStatus());
         assertEquals(FAIL, inputDataManager.checkInputThreadProperties(unCorrectScrew).getResponseStatus());
     }

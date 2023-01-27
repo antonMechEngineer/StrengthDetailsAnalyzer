@@ -23,4 +23,9 @@ public interface AxialReportGenerated {
         }
     }
 
+    default void insertAxialResult(HashMap<String, String> mapTemplate, AxialDeformable axialDeformable){
+        mapTemplate.put(AXIAL_AREA, String.format( "%,.2f", axialDeformable.calculateAxialArea()));
+        mapTemplate.put(AXIAL_STRESS, String.format( "%,.0f", axialDeformable.getAxialStress()));
+        mapTemplate.put(AXIAL_SAFETY_FACTOR,  String.format( "%,.2f", axialDeformable.getAxialSafetyFactor()));
+    }
 }

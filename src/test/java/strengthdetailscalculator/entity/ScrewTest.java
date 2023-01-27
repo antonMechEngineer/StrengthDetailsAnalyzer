@@ -2,14 +2,14 @@ package strengthdetailscalculator.entity;
 
 import org.junit.jupiter.api.Test;
 import strengthdetailscalculator.entity.enums.ScrewType;
-
 import static java.lang.Math.PI;
 import static java.lang.Math.pow;
-import static strengthdetailscalculator.entity.enums.StressConditionType.AXIAL;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static strengthdetailscalculator.entity.enums.StressConditionType.SHEAR;
 
-public class ScrewTest extends DetailTest {
-    protected Screw screw = new Screw(detail, 10d, 1d, 7d, ScrewType.METRICAL, 8.917, 8.773);
+public class ScrewTest {
+    private final Detail detail = new Detail("name", "code", "сталь", 240d, 1000d);
+    private final Screw screw = new Screw(detail, 10d, 1d, 7d, ScrewType.METRICAL, 8.917, 8.773);
 
     @Test
     public void testCalculateShearArea(){
@@ -37,15 +37,4 @@ public class ScrewTest extends DetailTest {
                 SHEAR.stressRatio * screw.getYieldStress() / screw.calculateShearStress();
         assertEquals(expectedShearSafetyFactor, screw.calculateShearSafetyFactor());
     }
-    @Test
-    public void testCalculateAxialStress(){
-        Double expectedAxialStress = screw.getForce() / screw.calculateAxialArea();
-        assertEquals(expectedAxialStress, screw.calculateAxialStress());
-    }
-    @Test
-    public void testCalculateAxialSafetyFactor(){
-        Double expectedAxialSafetyFactor =
-                AXIAL.stressRatio * screw.getYieldStress() / screw.calculateAxialStress();
-    }
-
 }

@@ -1,8 +1,17 @@
 package strengthdetailscalculator.entity.interfaces;
 
-import strengthdetailscalculator.entity.enums.StressConditionType;
+import static strengthdetailscalculator.entity.enums.StressConditionType.BENDING;
 
 public interface BendingDeformable extends Safety {
+
+    Double getBendingResistance();
+
+    Double getBendingMoment();
+
+    Double getBendingStress();
+
+    Double getBendingSafetyFactor();
+
     Double calculateBendingResistance();
 
     Double calculateBendingMoment();
@@ -12,9 +21,7 @@ public interface BendingDeformable extends Safety {
     }
 
     default Double calculateBendingSafetyFactor() {
-        return StressConditionType.BENDING.stressRatio * getYieldStress() / calculateBendingStress();
+        return BENDING.stressRatio * getYieldStress() / calculateBendingStress();
     }
-
-    Double getBendingSafetyFactor();
 
 }

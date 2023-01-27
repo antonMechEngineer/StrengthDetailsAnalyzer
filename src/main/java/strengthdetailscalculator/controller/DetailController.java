@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import lombok.Getter;
+import lombok.Setter;
 import strengthdetailscalculator.StrengthDetailsCalculator;
 import strengthdetailscalculator.utils.AlertHandler;
 import strengthdetailscalculator.utils.DocumentWriter;
@@ -17,6 +19,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public abstract class DetailController extends Controller {
 
     AlertHandler alertHandler = new AlertHandler();
@@ -65,7 +69,7 @@ public abstract class DetailController extends Controller {
         switchSceneByEvent(PATH_FINISH_SCENE, NAME_FINISH_SCENE, event);
     }
 
-    protected List<String> getDetailData(){
+    public final List<String> getDetailData(){
         ArrayList<String> textDataDetail = new ArrayList<>();
         textDataDetail.add(INDEX_NAME, name.getText());
         textDataDetail.add(INDEX_CODE, code.getText());
@@ -73,14 +77,14 @@ public abstract class DetailController extends Controller {
         return  textDataDetail;
     }
 
-    protected List<String> getNumericalDataDetail(){
+    public final List<String> getNumericalDataDetail(){
         ArrayList<String> numericalDataDetail = new ArrayList<>();
         numericalDataDetail.add(INDEX_YIELD_STRESS, yieldStress.getText());
         numericalDataDetail.add(INDEX_FORCE, force.getText());
         return numericalDataDetail;
     }
 
-    protected void processResponse(Response response, ActionEvent event) throws IOException {
+    protected final void processResponse(Response response, ActionEvent event) throws IOException {
         if (response.getResponseStatus() == ResponseStatus.SUCCESS) {
             switchFinishScene(event);
         } else {

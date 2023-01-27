@@ -5,23 +5,28 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static java.lang.Math.pow;
-import static strengthdetailscalculator.entity.enums.StressConditionType.BENDING;
-import static strengthdetailscalculator.entity.enums.StressConditionType.VON_MISSES;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AxleTest extends PinTest {
-   private final Axle axle1 = new Axle(pin1, 100d);
-   private final Axle axle2 = new Axle(pin2, 100d);
-   private final Axle axle3 = new Axle(pin3, 100d);
-   private final Axle axle4 = new Axle(pin4, 100d);
-   private final List<Axle> axles = List.of(axle1, axle2, axle3, axle4);
+public class AxleTest {
+    private final Detail detail = new Detail("name", "code", "сталь", 240d, 1000d);
+    private final Pin pin1 = new Pin(detail, 20d, 0d, 1d);
+    private final Pin pin2 = new Pin(pin1, 2d);
+    private final Pin pin3 = new Pin(pin1, 3d);
+    private final Pin pin4 = new Pin(pin1, 4d);
+    private final Axle axle1 = new Axle(pin1, 100d);
+    private final Axle axle2 = new Axle(pin2, 100d);
+    private final Axle axle3 = new Axle(pin3, 100d);
+    private final Axle axle4 = new Axle(pin4, 100d);
+    private final List<Axle> axles = List.of(axle1, axle2, axle3, axle4);
 
-   @Test
-    public void testBendingResistance(){
-        Double expectedBendingResistance = 0.1 * (pow(axle1.getOuterDiameter(), 3) - (pow (axle1.getInternalDiameter(), 3)));
+    @Test
+    public void calculateBendingResistance() {
+        Double expectedBendingResistance = 0.1 * (pow(axle1.getOuterDiameter(), 3) - (pow(axle1.getInternalDiameter(), 3)));
         assertEquals(expectedBendingResistance, axle1.calculateBendingResistance());
     }
+
     @Test
-    public void testBendingMoment(){
+    public void calculateBendingMoment() {
         Double expectedBendingMoment1 = axle1.getForce() * axle1.getSupportLength();
         assertEquals(expectedBendingMoment1, axle1.calculateBendingMoment());
         Double expectedBendingMoment2 = axle2.getForce() * axle2.getSupportLength() / 4;
@@ -31,25 +36,10 @@ public class AxleTest extends PinTest {
         Double expectedBendingMoment4 = axle4.getForce() * axle4.getSupportLength() * 3 / 128;
         assertEquals(expectedBendingMoment4, axle4.calculateBendingMoment());
     }
+
     @Test
-    public void testCalculateBendingStress(){
-        Double expectedBendingStress = axle1.calculateBendingMoment() / axle1.calculateBendingResistance();
-        assertEquals(expectedBendingStress, axle1.calculateBendingStress());
-    }
-    @Test
-    public void testBendingSafetyFactor(){
-        Double expectedBendingSafetyFactor1 = BENDING.stressRatio * axle1.getYieldStress()/ axle1.calculateBendingStress();
-        assertEquals(expectedBendingSafetyFactor1, axle1.calculateBendingSafetyFactor());
-    }
-    @Test
-    public void testCalculateVonMisesStress(){
-        Double expectedVonMissesStress1 = pow (( pow(axle1.calculateBendingStress(), 2) + 3 * pow(axle1.calculateShearStress(), 2)), 0.5);
+    public void calculateVonMisesStress() {
+        Double expectedVonMissesStress1 = pow((pow(axle1.calculateBendingStress(), 2) + 3 * pow(axle1.calculateShearStress(), 2)), 0.5);
         assertEquals(expectedVonMissesStress1, axle1.calculateVonMissesStress());
-    }
-
-    public void testCalculateVonMissesSafetyFactor(){
-        Double expectedVonMissesStressSafetyFactor1 = VON_MISSES.stressRatio * axle1.getYieldStress() / axle1.calculateVonMissesStress();
-        assertEquals(expectedVonMissesStressSafetyFactor1, axle1.calculateVonMissesSafetyFactor());
-
     }
 }

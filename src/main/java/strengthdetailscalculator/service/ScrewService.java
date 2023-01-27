@@ -59,9 +59,9 @@ public final class ScrewService extends DetailService {
 
     private Screw build(Detail detail, List<String> data) {
         ScrewType screwType = getScrewType(data.get(ScrewController.INDEX_TYPE_SCREW));
-        Double mainD = Double.valueOf(data.get(0));
-        Double threadPitch = Double.valueOf(data.get(1));
-        Double height = Double.valueOf(data.get(2));
+        Double mainD = Double.valueOf(data.get(INDEX_MAIN_D));
+        Double threadPitch = Double.valueOf(data.get(INDEX_THREAD_PITCH));
+        Double height = Double.valueOf(data.get(INDEX_HEIGHT));
         Screw screw = new Screw(detail,
                 mainD, threadPitch, height, screwType,
                 getInternalD(mainD, threadPitch, screwType),

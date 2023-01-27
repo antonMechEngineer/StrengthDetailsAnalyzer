@@ -17,4 +17,8 @@ public class StartSceneController extends Controller {
         switchSceneByEvent(PATH_AXLE_SCENE, NAME_AXLE_SCENE,  event);
     }
 
+    public void switchToEarScene(ActionEvent event) throws IOException {
+        switchSceneByEvent(PATH_EAR_SCENE, NAME_EAR_SCENE,  event);
+    }
+
 }

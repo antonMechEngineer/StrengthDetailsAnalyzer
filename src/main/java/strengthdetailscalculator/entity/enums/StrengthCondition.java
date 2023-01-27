@@ -9,5 +9,4 @@ public enum StrengthCondition {
         this.conclusion = conclusion;
         this.sign = sign;
     }
-
 }

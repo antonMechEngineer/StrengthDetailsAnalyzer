@@ -2,29 +2,28 @@ package strengthdetailscalculator.service;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import strengthdetailscalculator.entity.DetailTest;
+import strengthdetailscalculator.entity.Detail;
 import strengthdetailscalculator.entity.Pin;
 import strengthdetailscalculator.utils.DocumentWriter;
 import strengthdetailscalculator.utils.InputDataManager;
 import strengthdetailscalculator.utils.response.Response;
-
 import java.util.List;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import static strengthdetailscalculator.utils.response.ResponseStatus.SUCCESS;
 
-
-class PinServiceTest extends DetailTest {
+class PinServiceTest {
+    private final Detail detail = new Detail("name", "code", "сталь", 240d, 1000d);
     private final String outerDiameter = "10.2";
     private final String internalDiameter = "0";
     private final String numberShearSect = "2";
     private final List<String> data = List.of(outerDiameter, internalDiameter, numberShearSect);
-    Pin expectedPin = new Pin
+    private final Pin expectedPin = new Pin
             (detail, Double.valueOf(outerDiameter), Double.valueOf(internalDiameter), Double.valueOf(numberShearSect));
-
     private InputDataManager mockInputDataManager = Mockito.mock(InputDataManager.class);
     private DocumentWriter mockDocumentWriter = Mockito.mock(DocumentWriter.class);
     private PinService pinService = new PinService(mockDocumentWriter, mockInputDataManager);
+
 
     @Test
     void writeSpecifiedDetail() {
@@ -51,8 +50,7 @@ class PinServiceTest extends DetailTest {
 
     @Test
     void prepareData() {
-        List<String> correctingData = List.of("10,2", "0", "2");
-        pinService.prepareData(correctingData);
-        verify(mockInputDataManager, times(1)).replaceCommasWithDots(correctingData);
+        pinService.prepareData(data);
+        verify(mockInputDataManager, times(1)).replaceCommasWithDots(data);
     }
 }

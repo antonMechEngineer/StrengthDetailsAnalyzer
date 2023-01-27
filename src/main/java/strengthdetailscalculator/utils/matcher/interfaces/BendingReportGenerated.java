@@ -15,7 +15,7 @@ public interface BendingReportGenerated {
     String BENDING_STRESS = "${bendingStress}";
     String BENDING_SAFETY_FACTOR = "${bendingSafetyFactor}";
 
-    default void insertBendConclusion(HashMap<String, String> mapTemplate, BendingDeformable bendingDeformable){
+    default void insertBendingConclusion(HashMap<String, String> mapTemplate, BendingDeformable bendingDeformable){
         if (bendingDeformable.getBendingSafetyFactor() > bendingDeformable.getMinSafetyFactor()){
             mapTemplate.put(SIGN, StrengthCondition.SAFETY.sign);
             mapTemplate.put(CONCLUSION, StrengthCondition.SAFETY.conclusion);
@@ -24,6 +24,13 @@ public interface BendingReportGenerated {
             mapTemplate.put(SIGN, StrengthCondition.FAIL.sign);
             mapTemplate.put(CONCLUSION, StrengthCondition.FAIL.conclusion);
         }
+    }
+
+    default void insertBendingResult(HashMap<String, String> mapTemplate, BendingDeformable bendingDeformable){
+        mapTemplate.put(BENDING_SAFETY_FACTOR, String.format("%,.2f", bendingDeformable.getBendingSafetyFactor()));
+        mapTemplate.put(BENDING_STRESS, String.format("%,.0f", bendingDeformable.getBendingStress()));
+        mapTemplate.put(BENDING_MOMENT, String.format("%,.0f", bendingDeformable.getBendingMoment()));
+        mapTemplate.put(BENDING_RESISTANCE, String.format("%,.0f", bendingDeformable.getBendingResistance()));
     }
 
 }

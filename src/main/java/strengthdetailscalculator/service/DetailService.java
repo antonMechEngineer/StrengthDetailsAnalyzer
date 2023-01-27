@@ -25,8 +25,6 @@ public abstract class DetailService implements ResponseCovered, DetailChecked {
     protected abstract List<String> prepareData(List<String> data);
 
 
-
-
     public Response write(List<String> textDetailData, List<String> numericalDetailData, List<String> data) {
         Response preProcessData = preProcessData(textDetailData, numericalDetailData, data);
         if (preProcessData.getResponseStatus() == ResponseStatus.SUCCESS) {

@@ -31,7 +31,8 @@ public final class AxleService extends PinService {
     protected Axle build(Detail detail, List<String> data){
         Pin pin = super.build(detail, data) ;
         String supportLength =  data.get(AxleController.INDEX_NUMBER_SUPPORT_LENGTH);
-        return new Axle(pin, Double.valueOf(supportLength));
+        Axle axle = new Axle(pin, Double.valueOf(supportLength));
+        return axle;
     }
 
     @Override

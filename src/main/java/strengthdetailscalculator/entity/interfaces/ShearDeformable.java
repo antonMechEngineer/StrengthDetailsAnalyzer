@@ -4,9 +4,13 @@ import strengthdetailscalculator.entity.enums.StressConditionType;
 
 public interface ShearDeformable extends Safety {
 
-    Double calculateShearArea();
-
     Double getShearSafetyFactor();
+
+    Double getShearArea();
+
+    Double getShearStress();
+
+    Double calculateShearArea();
 
     default Double calculateShearStress() {
         return getForce() / calculateShearArea();

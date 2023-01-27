@@ -35,6 +35,7 @@ public class DocumentWriter {
     }
 
     public void writeAxle(Axle axle) {
+
         write(axleMatcher.getMapTemplateAxle(axle), PATH_AXLE_TMPL, PATH_AXLE_RES);
     }
 

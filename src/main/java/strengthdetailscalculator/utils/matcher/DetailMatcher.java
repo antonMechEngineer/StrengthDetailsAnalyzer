@@ -1,15 +1,16 @@
 package strengthdetailscalculator.utils.matcher;
 
 import strengthdetailscalculator.entity.Detail;
+
 import java.util.HashMap;
 
-public abstract class DetailMatcher {
-    protected static final String NAME = "${name}";
-    protected static final String CODE = "${code}";
-    protected static final String YIELD_STRESS = "${yieldStress}";
-    protected static final String MATERIAL = "${material}";
-    protected static final String FORCE = "${force}";
-    protected static final String MIN_SAFETY_FACTOR = "${minSafetyFactor}";
+public class DetailMatcher {
+    public static final String NAME = "${name}";
+    public static final String CODE = "${code}";
+    public static final String YIELD_STRESS = "${yieldStress}";
+    public static final String MATERIAL = "${material}";
+    public static final String FORCE = "${force}";
+    public static final String MIN_SAFETY_FACTOR = "${minSafetyFactor}";
 
     protected HashMap<String, String> getMapTemplateDetail(Detail detail){
         HashMap<String, String> detailTemplate = new HashMap<>();

@@ -22,4 +22,9 @@ public interface VonMissesReportGenerated {
             mapTemplate.put(CONCLUSION, StrengthCondition.FAIL.conclusion);
         }
     }
+
+    default void insertVonMissesResult(HashMap<String, String> mapTemplate, ComplexDeformable complexDeformable){
+        mapTemplate.put(VON_MISSES_STRESS, String.format("%,.0f", complexDeformable.getVonMissesStress()));
+        mapTemplate.put(VON_MISSES_SAFETY_FACTOR, String.format("%,.2f", complexDeformable.getVonMissesSafetyFactor()));
+    }
 }

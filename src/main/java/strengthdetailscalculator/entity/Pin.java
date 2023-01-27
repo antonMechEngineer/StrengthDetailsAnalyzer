@@ -18,7 +18,6 @@ public class Pin extends Detail implements ShearDeformable {
     protected final Double internalDiameter;
     protected final Double numberShearSection;
     protected final Double shearArea;
-
     protected final Double shearStress;
     protected final Double shearSafetyFactor;
 

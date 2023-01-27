@@ -10,24 +10,20 @@ import static strengthdetailscalculator.entity.enums.MomentsType.*;
 
 public class AxleMatcher extends PinMatcher implements VonMissesReportGenerated, BendingReportGenerated {
 
-    protected static final String SUPPORT_LENGTH = "${supportLength}";
+    public static final String SUPPORT_LENGTH = "${supportLength}";
 
     public HashMap<String, String> getMapTemplateAxle(Axle axle) {
         HashMap<String, String> mapTemplate = getMapTemplatePin(axle);
-        mapTemplate.put(BENDING_SAFETY_FACTOR, String.format("%,.0f", axle.getBendingSafetyFactor()));
-        mapTemplate.put(BENDING_STRESS, String.format("%,.0f", axle.getBendingStress()));
-        mapTemplate.put(SUPPORT_LENGTH, String.format("%,.0f", axle.getSupportLength()));
-        mapTemplate.put(BENDING_MOMENT, String.format("%,.0f", axle.getBendingMoment()));
-        mapTemplate.put(BENDING_RESISTANCE, String.format("%,.0f", axle.getBendingResistance()));
-        mapTemplate.put(VON_MISSES_STRESS, String.format("%,.0f", axle.getVonMissesStress()));
-        mapTemplate.put(VON_MISSES_SAFETY_FACTOR, String.format("%,.0f", axle.getVonMissesSafetyFactor()));
-        addMomentDescription(mapTemplate, axle);
+        insertAxleProperties(mapTemplate, axle);
+        insertMomentDescription(mapTemplate, axle);
+        insertBendingResult(mapTemplate, axle);
+        insertBendingConclusion(mapTemplate, axle);
+        insertVonMissesResult(mapTemplate, axle);
         insertVonMissesConclusion(mapTemplate, axle);
-        insertBendConclusion(mapTemplate, axle);
         return mapTemplate;
     }
 
-    private void addMomentDescription(HashMap<String, String> mapTemplate, Axle axle) {
+    private void insertMomentDescription(HashMap<String, String> mapTemplate, Axle axle) {
         if (axle.getNumberShearSection() == 1) {
             String expression = String.format("%,.0f", axle.getForce()) + " ∙ " + String.format("%,.0f", axle.getSupportLength());
             putMoment(mapTemplate, CONSOLE.equation, expression);
@@ -48,4 +44,7 @@ public class AxleMatcher extends PinMatcher implements VonMissesReportGenerated,
         mapTemplate.put(CALCULATION_BENDING_MOMENT, expression);
     }
 
+    private void insertAxleProperties(HashMap<String, String> mapTemplate, Axle axle){
+        mapTemplate.put(SUPPORT_LENGTH, String.format("%,.0f", axle.getSupportLength()));
+    }
 }

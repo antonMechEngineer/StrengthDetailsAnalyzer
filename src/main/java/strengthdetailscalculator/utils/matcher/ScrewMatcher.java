@@ -8,17 +8,26 @@ import java.util.HashMap;
 
 public class ScrewMatcher extends DetailMatcher implements ShearReportGenerated, AxialReportGenerated {
 
-    private static final String MAIN_D = "${d}";
-    private static final String GOST = "${gost}";
-    private static final String INTERNAL_D = "${d2}";
-    private static final String MIN_D = "${d3}";
-    private static final String THREAD_PITCH = "${p}";
-    private static final String HEIGHT = "${height}";
-    private static final String Kh = "${kh}";
-    private static final String Kp = "${kp}";
+    public static final String MAIN_D = "${d}";
+    public static final String GOST = "${gost}";
+    public static final String INTERNAL_D = "${d2}";
+    public static final String MIN_D = "${d3}";
+    public static final String THREAD_PITCH = "${p}";
+    public static final String HEIGHT = "${height}";
+    public static final String Kh = "${kh}";
+    public static final String Kp = "${kp}";
 
     public HashMap<String, String> getMapTemplateScrew(Screw screw) {
         HashMap<String, String> mapTemplate = getMapTemplateDetail(screw);
+        insertScrewProperties(mapTemplate, screw);
+        insertShearResults(mapTemplate, screw);
+        insertShearConclusion(mapTemplate, screw);
+        insertAxialResult(mapTemplate, screw);
+        insertAxialConclusion(mapTemplate, screw);
+        return mapTemplate;
+    }
+
+    private void insertScrewProperties(HashMap<String, String> mapTemplate, Screw screw){
         mapTemplate.put(MAIN_D, String.format( "%,.0f", screw.getMainD()));
         mapTemplate.put(GOST, screw.getScrewType().gost);
         mapTemplate.put(INTERNAL_D, String.format( "%,.3f", screw.getInternalD()));
@@ -27,14 +36,6 @@ public class ScrewMatcher extends DetailMatcher implements ShearReportGenerated,
         mapTemplate.put(HEIGHT, String.format( "%,.1f", screw.getHeight()));
         mapTemplate.put(Kh, String.format( "%,.2f", screw.calculateKh()));
         mapTemplate.put(Kp, String.format( "%,.2f", screw.getScrewType().kp));
-        mapTemplate.put(SHEAR_AREA, String.format( "%,.2f", screw.calculateShearArea()));
-        mapTemplate.put(SHEAR_STRESS, String.format( "%,.0f", screw.getShearStress()));
-        mapTemplate.put(SHEAR_SAFETY_FACTOR , String.format( "%,.2f", screw.getShearSafetyFactor()));
-        mapTemplate.put(AXIAL_AREA, String.format( "%,.2f", screw.calculateAxialArea()));
-        mapTemplate.put(AXIAL_STRESS, String.format( "%,.0f", screw.getAxialStress()));
-        mapTemplate.put(AXIAL_SAFETY_FACTOR,  String.format( "%,.2f", screw.getAxialSafetyFactor()));
-        insertShearConclusion(mapTemplate, screw);
-        insertAxialConclusion(mapTemplate, screw);
-        return mapTemplate;
     }
+
 }
