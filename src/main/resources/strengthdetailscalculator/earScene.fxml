@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="952.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="strengthdetailscalculator.controller.EarController">
+<AnchorPane centerShape="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="strengthdetailscalculator.controller.EarController">
    <Label layoutX="119.0" layoutY="14.0" text="Введите характеристики проушины" underline="true">
       <font>
          <Font size="20.0" />
@@ -98,7 +98,7 @@
       </font>
    </CheckBox>
 
-   <CheckBox fx:id="currentEarIsLarger" layoutX="358.0" layoutY="669.0" mnemonicParsing="false" disable="true" text="Наибольшая проушина">
+   <CheckBox fx:id="currentEarIsLarger" layoutX="358.0" layoutY="669.0" mnemonicParsing="false" onAction="#getGapProperty" disable="true" text="Наибольшая проушина">
       <font>
          <Font size="14.0" />
       </font>

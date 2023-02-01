@@ -8,10 +8,10 @@ public enum ScrewType {
     METRICAL(0.75, "ГОСТ 24705-2004", "Метрическая");
     public Double kp;
     public String gost;
-    public String name;
-    ScrewType(Double kp, String gost, String name) {
+    public String description;
+    ScrewType(Double kp, String gost, String description) {
         this.kp = kp;
         this.gost = gost;
-        this.name = name();
+        this.description = description;
     }
 }

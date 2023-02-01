@@ -21,7 +21,7 @@ class ScrewMatcherTest {
     private final String midD = "9.35";
     private final String internalD = "8.917";
     private final String minD = "8.773";
-    private final List<String> data = List.of(mainD, threadPitch, height, screwType.name);
+    private final List<String> data = List.of(mainD, threadPitch, height, screwType.description);
     private final Screw screw = new Screw(detail, Double.valueOf(mainD), Double.valueOf(threadPitch),
             Double.valueOf(height), screwType, Double.valueOf(internalD), Double.valueOf(minD));
     private final ScrewMatcher screwMatcher = new ScrewMatcher();

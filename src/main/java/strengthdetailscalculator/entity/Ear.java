@@ -1,5 +1,6 @@
 package strengthdetailscalculator.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import strengthdetailscalculator.entity.enums.EarType;
@@ -7,6 +8,7 @@ import strengthdetailscalculator.entity.interfaces.AxialDeformable;
 
 import static java.lang.Math.*;
 
+@EqualsAndHashCode
 @Getter
 @Setter
 public class Ear extends Detail implements AxialDeformable {
@@ -21,8 +23,9 @@ public class Ear extends Detail implements AxialDeformable {
     private final Double axialArea;
     private final Double axialStress;
     private final Double axialSafetyFactor;
-    private static final Double DEFAULT_ALFA = 1.0;
-    private static final Double DEFAULT_K = 0.35;
+    private final Double KC;
+    public static final Double DEFAULT_ALFA = 1.0;
+    public static final Double SMALL_EAR_K = 0.35;
 
     public Ear(Detail detail, Double outerD, Double internalD, Double thickness, Double eccentricity,
                Boolean isSingleShearedConnection, EarType earType, Boolean currentEarIsLarger, Double gap) {
@@ -35,15 +38,10 @@ public class Ear extends Detail implements AxialDeformable {
         this.earType = earType;
         this.currentEarIsLarger = currentEarIsLarger;
         this.gap = gap;
+        this.KC = eccentricity / internalD;
         this.axialArea = calculateAxialArea();
         this.axialStress = calculateAxialStress();
         this.axialSafetyFactor = calculateAxialSafetyFactor();
-    }
-
-
-    @Override
-    public Double getAxialStress() {
-        return force / calculateAxialArea();
     }
 
     @Override
@@ -52,21 +50,21 @@ public class Ear extends Detail implements AxialDeformable {
     }
 
     public Double calculateK() {
-        if (isSingleShearedConnection.booleanValue()) {
+        if (!isSingleShearedConnection.booleanValue()) {
             return earType.val;
         } else {
             if (currentEarIsLarger) {
-                return 1 / (4.5 - 2 * gap / thickness);
+                return 1 / (4.5 + 2 * gap / thickness);
             } else {
-                return DEFAULT_K;
+                return SMALL_EAR_K;
             }
         }
     }
 
     public Double calculateAlfa() {
         Double kD = outerD / internalD;
-        Double kC = eccentricity / internalD;
-        if ((0.10506 * (pow(kD, 2) - 0.1223 * kD + 0.0163)) < kC) {
+        Double borderAlfa = 0.10506 * pow(kD, 2) - 0.1223 * kD + 0.0163;
+        if (borderAlfa > KC) {
             return 1.025 + 0.92 * eccentricity / (internalD * (kD - 1)) - 0.1 * kD;
         } else {
             return DEFAULT_ALFA;

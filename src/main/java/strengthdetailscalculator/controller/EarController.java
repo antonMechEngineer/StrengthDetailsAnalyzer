@@ -69,15 +69,16 @@ public class EarController extends DetailController {
         data.add(INDEX_INTERNAL_D, internalDiameter.getText());
         data.add(INDEX_THICKNESS, thickness.getText());
         data.add(INDEX_ECCENTRICITY, eccentricity.getText());
-        data.add(INDEX_TYPE_EAR, earType.getValue().toString());
-        data.add(INDEX_IS_SINGLE_SHEARED_CONNECTION, isSingleShearedConnection.getText());
+        data.add(INDEX_TYPE_EAR, earType.getValue());
+        data.add(INDEX_IS_SINGLE_SHEARED_CONNECTION, Boolean.valueOf(isSingleShearedConnection.isSelected()).toString());
+        data.add(INDEX_IS_EAR_LARGER, Boolean.valueOf(currentEarIsLarger.isSelected()).toString());
         data.add(INDEX_GAP, gap.getText());
         return data;
     }
 
     @FXML
     private void getEarType() {
-        earType.getItems().addAll(STEEL_CENTRAL.name(), STEEL_SIDE.name(), ALUMINUM_SIDE.name());
+        earType.getItems().addAll(STEEL_CENTRAL.description, STEEL_SIDE.description, ALUMINUM_SIDE.description);
         if (earType.getValue() != null) {
             printButton.setDisable(false);
         }
@@ -86,13 +87,23 @@ public class EarController extends DetailController {
     @FXML
     private void getAdditionalProperties() {
         if (isSingleShearedConnection.isSelected()) {
+            earType.setDisable(true);
             currentEarIsLarger.setDisable(false);
-            gap.setDisable(false);
+            printButton.setDisable(false);
         } else {
+            earType.setDisable(false);
             currentEarIsLarger.setDisable(true);
             gap.setDisable(true);
         }
-
     }
 
+    @FXML
+    void getGapProperty() {
+        if (currentEarIsLarger.isSelected()) {
+            gap.setDisable(false);
+        }
+        else {
+            gap.setDisable(true);
+        }
+    }
 }

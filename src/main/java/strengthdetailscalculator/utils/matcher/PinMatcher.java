@@ -24,5 +24,4 @@ public class PinMatcher extends DetailMatcher implements ShearReportGenerated {
         mapTemplate.put(INTERNAL_DIAMETER, String.format( "%,.1f", pin.getInternalDiameter()));
         mapTemplate.put(NUMBER_SHEAR_SECTION, String.format( "%,.0f", pin.getNumberShearSection()));
     }
-
 }

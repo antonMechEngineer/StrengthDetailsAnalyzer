@@ -56,7 +56,7 @@ public class ScrewController extends DetailController {
 
     @FXML
     private void getScrewType() {
-        screwType.getItems().addAll(METRICAL.name, TRAPEZOIDAL.name);
+        screwType.getItems().addAll(METRICAL.description, TRAPEZOIDAL.description);
         if (screwType.getValue() != null) {
             printButton.setDisable(false);
         }

@@ -17,6 +17,8 @@ public class StrengthDetailsCalculator extends Application {
         Scene scene = new Scene(root);
         stage.setTitle("Расчёт прочности стандартных деталей");
         stage.setScene(scene);
+        stage.setY(0);
+        stage.setX(0);
         stage.show();
         primaryStage = stage;
     }

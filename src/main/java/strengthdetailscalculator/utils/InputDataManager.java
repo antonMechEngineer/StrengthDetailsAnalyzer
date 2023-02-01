@@ -59,15 +59,27 @@ public class InputDataManager implements ResponseCovered {
     public List<String> replaceCommasWithDots(List<String> data) {
         ArrayList<String> processedStrings = new ArrayList<>();
         for (String string : data) {
-             String processedString = replaceCommasWithDots(string);
-             processedStrings.add(processedString);
+            String processedString = replaceCommasWithDots(string);
+            processedStrings.add(processedString);
         }
         return processedStrings;
     }
 
-    public String replaceCommasWithDots(String dataString){
-       String processedString = dataString.replace(",", ".");
-       return processedString;
+    public String replaceCommasWithDots(String dataString) {
+        String processedString = dataString.replace(",", ".");
+        return processedString;
+    }
+
+    public List<String> prepareNullableString(List<String> data, Integer indexNullableValue) {
+        List<String> processedData = new ArrayList<>();
+        for (String dataMember : data) {
+            if (dataMember == null) {
+                processedData.add(indexNullableValue, "");
+            } else {
+                processedData.add(dataMember);
+            }
+        }
+        return processedData;
     }
 
     private Boolean getInversionIfRequired(Boolean isRequired, Boolean processedBoolean) {
@@ -78,7 +90,6 @@ public class InputDataManager implements ResponseCovered {
         }
     }
 
-
     private Response checkData(String pattern, List<String> data, Boolean isCorrectPattern) {
         StringBuilder stringBuilder = new StringBuilder();
         Pattern numericalPattern = Pattern.compile(pattern);
@@ -86,7 +97,7 @@ public class InputDataManager implements ResponseCovered {
         for (String textField : data) {
             matcherData = numericalPattern.matcher(textField);
             Boolean isFound = matcherData.matches();
-            if(getInversionIfRequired(isCorrectPattern, isFound)){
+            if (getInversionIfRequired(isCorrectPattern, isFound)) {
                 writeError(stringBuilder, textField);
             }
         }

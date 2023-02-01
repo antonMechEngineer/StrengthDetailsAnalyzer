@@ -139,7 +139,7 @@ public final class ScrewService extends DetailService {
     }
 
     private ScrewType getScrewType(String name) {
-        if (name.equals(TRAPEZOIDAL)) {
+        if (name.equals("Трапецеидальная")) {
             return TRAPEZOIDAL;
         }
         return METRICAL;
