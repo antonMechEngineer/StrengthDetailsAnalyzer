@@ -86,11 +86,12 @@ public class EarMatcher extends DetailMatcher implements AxialReportGenerated {
             System.out.println(ear.getCurrentEarIsLarger());
             if (ear.getCurrentEarIsLarger()) {
                 kEquation = " 1 / ( 4,5 + 2 ∙ s / t ) = ";
-                kExpression = " 1 / ( 4,5 + 2 ∙ " + String.format("%,.0f", ear.getGap()) + " / " + String.format("%,.0f", ear.getThickness()) + " ) = ";
-                kDescription = "где  s = " + String.format("%,.0f", ear.getGap()) + " мм – зазор между проушинами.";
+                kExpression = " 1 / ( 4,5 + 2 ∙ " + String.format("%,.2f", ear.getGap()) + " / " + String.format("%,.0f", ear.getThickness()) + " ) = ";
+                kDescription = "где  s = " + String.format("%,.2f", ear.getGap()) + " мм – зазор между проушинами.";
                 mapTemplate.put(K_EQUATION, kEquation);
                 mapTemplate.put(K_EXPRESSION, kExpression);
                 mapTemplate.put(K_DESCRIPTION, kDescription);
+                mapTemplate.put(GAP, String.format("%,.2f", ear.getGap()));
             } else {
                 mapTemplate.put(K_EQUATION, kEquation);
                 mapTemplate.put(K_EXPRESSION, kExpression);

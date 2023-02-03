@@ -22,6 +22,7 @@ class EarMatcherTest {
     private final Boolean isSingleShearedConnection =  true;
     private final Boolean currentEarIsLarger = true;
     private final Double gap = 1.25;
+
     private final List<String> data = List.of(outerD.toString(), internalD.toString(), thickness.toString(), eccentricity.toString(),
             earType.description, isSingleShearedConnection.toString(), currentEarIsLarger.toString(), gap.toString());
     private final Detail detail = new Detail("name", "code", "сталь", 240d, 1000d);
@@ -37,12 +38,14 @@ class EarMatcherTest {
         assertEquals(expectedMapTemplate.get(INTERNAL_DIAMETER), actualMapTemplate.get(INTERNAL_DIAMETER));
         assertEquals(expectedMapTemplate.get(THICKNESS), actualMapTemplate.get(THICKNESS));
         assertEquals(expectedMapTemplate.get(ECCENTRICITY), actualMapTemplate.get(ECCENTRICITY));
-        assertEquals(expectedMapTemplate.get(EAR_POSITION), actualMapTemplate.get(EAR_POSITION));
         assertEquals(expectedMapTemplate.get(K), actualMapTemplate.get(K));
         assertEquals(expectedMapTemplate.get(KC), actualMapTemplate.get(KC));
         assertEquals(expectedMapTemplate.get(GAP), actualMapTemplate.get(GAP));
-        assertEquals(expectedMapTemplate.get(ALFA_EQUATION));
-
+        assertEquals(expectedMapTemplate.get(ALFA_EQUATION), actualMapTemplate.get(ALFA_EQUATION));
+        assertEquals(expectedMapTemplate.get(ALFA_EXPRESSION), actualMapTemplate.get(ALFA_EXPRESSION));
+        assertEquals(expectedMapTemplate.get(K_EQUATION), actualMapTemplate.get(K_EQUATION));
+        assertEquals(expectedMapTemplate.get(K_EXPRESSION), actualMapTemplate.get(K_EXPRESSION));
+        assertEquals(expectedMapTemplate.get(K_DESCRIPTION), actualMapTemplate.get(K_DESCRIPTION));
     }
 
     private void insertExpectedEarTemplate(HashMap<String, String> expectedMapTemplate){

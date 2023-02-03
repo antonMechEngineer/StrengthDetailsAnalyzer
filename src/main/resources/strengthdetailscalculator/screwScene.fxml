@@ -10,98 +10,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="841.0" prefWidth="572.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="strengthdetailscalculator.controller.ScrewController">
-   <Label layoutX="137.0" layoutY="21.0" text="Введите характеристики резьбы" textAlignment="CENTER" underline="true">
-      <font>
-         <Font size="20.0" />
-      </font>
-   </Label>
-   <Label layoutX="80.0" layoutY="380.0" text="Наименование детали">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-   <Label layoutX="80.0" layoutY="420.0" text="Обозначение">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-   <Label layoutX="80.0" layoutY="460.0" text="Внешний диаметр d, мм">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-   <Label layoutX="80.0" layoutY="500.0" text="Шаг резьбы p, мм">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-   <Label layoutX="80.0" layoutY="620.0" text="Предел текучести, МПа">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-   <Label layoutX="80.0" layoutY="580.0" text="Материал">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-   <Label layoutX="80.0" layoutY="540.0" text="Высота резьбы h, мм">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-   <Label layoutX="80.0" layoutY="660.0" text="Действующее усилие F, Н">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-   <Label layoutX="80.0" layoutY="700.0" text="Тип резьбы">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-   <TextField fx:id="name" layoutX="320.0" layoutY="380.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-   <TextField fx:id="code" layoutX="320.0" layoutY="420.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-   <TextField fx:id="mainD" layoutX="320.0" layoutY="460.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-   <TextField fx:id="threadPitch" layoutX="320.0" layoutY="500.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-   <TextField fx:id="height" layoutX="320.0" layoutY="540.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-   <TextField fx:id="material" layoutX="320.0" layoutY="580.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-   <TextField fx:id="yieldStress" layoutX="320.0" layoutY="620.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-   <TextField fx:id="force" layoutX="320.0" layoutY="660.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-   <ComboBox fx:id="screwType" layoutX="320.0" layoutY="700.0" onAction="#getScrewType" onDragDetected="#getScrewType" onHiding="#getScrewType" onShown="#getScrewType" prefHeight="30.0" prefWidth="171.0" promptText="Выберите тип резьбы" />
-   <Button fx:id="printButton" disable="true" layoutX="270.0" layoutY="766.0" mnemonicParsing="false" onAction="#printDoc" prefHeight="39.0" prefWidth="258.0" text="Раcчитать и получить отчёт">
-      <font>
-         <Font size="18.0" />
-      </font></Button>
-   <Button layoutX="58.0" layoutY="766.0" mnemonicParsing="false" onAction="#switchStartScene" prefHeight="39.0" prefWidth="163.0" text="В главное меню">
-      <font>
-         <Font size="18.0" />
-      </font></Button>
+<AnchorPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="841.0" prefWidth="572.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="strengthdetailscalculator.controller.ScrewController" stylesheets="@styles/detailSceneStyle.css">
+   <Label layoutX="137.0" layoutY="21.0" text="Введите характеристики резьбы" textAlignment="CENTER" underline="true"/>
+   <Label layoutX="80.0" layoutY="380.0" text="Наименование детали"/>
+   <TextField fx:id="name" layoutX="320.0" layoutY="380.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="80.0" layoutY="420.0" text="Обозначение"/>
+   <TextField fx:id="code" layoutX="320.0" layoutY="420.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="80.0" layoutY="460.0" text="Внешний диаметр d, мм"/>
+   <TextField fx:id="mainD" layoutX="320.0" layoutY="460.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="80.0" layoutY="500.0" text="Шаг резьбы p, мм"/>
+   <TextField fx:id="threadPitch" layoutX="320.0" layoutY="500.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="80.0" layoutY="700.0" text="Тип резьбы"/>
+   <ComboBox fx:id="screwType" layoutX="320.0" layoutY="700.0" onAction="#getScrewType" onShown="#getScrewType" prefHeight="30.0" prefWidth="171.0" promptText="Выберите тип резьбы" />
+   <Label layoutX="80.0" layoutY="540.0" text="Высота резьбы h, мм"/>
+   <TextField fx:id="height" layoutX="320.0" layoutY="540.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="80.0" layoutY="580.0" text="Материал"/>
+   <TextField fx:id="material" layoutX="320.0" layoutY="580.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="80.0" layoutY="620.0" text="Предел текучести, МПа"/>
+   <TextField fx:id="yieldStress" layoutX="320.0" layoutY="620.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="80.0" layoutY="660.0" text="Действующее усилие F, Н"/>
+   <TextField fx:id="force" layoutX="320.0" layoutY="660.0" prefHeight="25.0" prefWidth="171.0"/>
+     <Button fx:id="printButton" disable="true" layoutX="270.0" layoutY="766.0" onAction="#printDoc" prefHeight="39.0" prefWidth="258.0" text="Раcчитать и получить отчёт"/>
+   <Button layoutX="58.0" layoutY="766.0" onAction="#switchStartScene" prefHeight="39.0" prefWidth="163.0" text="В главное меню"/>
    <ImageView fitHeight="278.0" fitWidth="554.0" layoutX="8.0" layoutY="73.0">
       <image>
          <Image url="@../icons/full/screw.jpg" />

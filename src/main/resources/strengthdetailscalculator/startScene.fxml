@@ -7,47 +7,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="strengthdetailscalculator.controller.StartSceneController">
-   <children>
-      <Button layoutX="238.0" layoutY="182.0" mnemonicParsing="false" onAction="#switchToScrewScene" prefHeight="35.0" prefWidth="164.0" text="Резьба">
-         <font>
-            <Font size="16.0" />
-         </font></Button>
-      <Button layoutX="238.0" layoutY="345.0" mnemonicParsing="false" onAction="#switchToPinScene" prefHeight="35.0" prefWidth="164.0" text="Штифт">
-         <font>
-            <Font size="16.0" />
-         </font></Button>
-      <Button layoutX="34.0" layoutY="345.0" mnemonicParsing="false" onAction="#switchToAxleScene" prefHeight="35.0" prefWidth="164.0" text="Ось">
-         <font>
-            <Font size="16.0" />
-         </font></Button>
-      <Button layoutX="34.0" layoutY="182.0" mnemonicParsing="false" onAction="#switchToEarScene" prefHeight="35.0" prefWidth="164.0" text="Проушина">
-         <font>
-            <Font size="16.0" />
-         </font></Button>
-      <Label layoutX="104.0" layoutY="14.0" text="Прочностной расчёт">
-         <font>
-            <Font size="24.0" />
-         </font></Label>
-      <ImageView fitHeight="110.0" fitWidth="174.0" layoutX="20.0" layoutY="64.0">
-         <image>
-            <Image url="@../icons/simple/earSimple.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="99.0" fitWidth="174.0" layoutX="233.0" layoutY="75.0">
-         <image>
-            <Image url="@../icons/simple/screwSimple.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="164.0" layoutX="239.0" layoutY="235.0">
-         <image>
-            <Image url="@../icons/simple/pinSimple.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="164.0" layoutX="29.0" layoutY="229.0">
-         <image>
-            <Image url="@../icons/simple/axleSimple.jpg" />
-         </image>
-      </ImageView>
-   </children>
+<AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0"
+            prefWidth="433.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="strengthdetailscalculator.controller.StartSceneController" stylesheets="@styles/mainScenesStyle.css">
+    <children>
+        <Button layoutX="238.0" layoutY="182.0" onAction="#switchToScrewScene" prefHeight="35.0" prefWidth="164.0" text="Резьба"/>
+        <Button layoutX="238.0" layoutY="345.0" onAction="#switchToPinScene" prefHeight="35.0" prefWidth="164.0" text="Штифт"/>
+        <Button layoutX="34.0" layoutY="345.0" onAction="#switchToAxleScene" prefHeight="35.0" prefWidth="164.0" text="Ось"/>
+        <Button layoutX="34.0" layoutY="182.0" onAction="#switchToEarScene" prefHeight="35.0" prefWidth="164.0" text="Проушина"/>
+        <Label layoutX="104.0" layoutY="14.0" text="Прочностной расчёт"/>
+        <ImageView fitHeight="110.0" fitWidth="174.0" layoutX="20.0" layoutY="64.0">
+            <image>
+                <Image url="@../icons/simple/earSimple.jpg"/>
+            </image>
+        </ImageView>
+        <ImageView fitHeight="99.0" fitWidth="174.0" layoutX="233.0" layoutY="75.0">
+            <image>
+                <Image url="@../icons/simple/screwSimple.jpg"/>
+            </image>
+        </ImageView>
+        <ImageView fitHeight="110.0" fitWidth="164.0" layoutX="239.0" layoutY="235.0">
+            <image>
+                <Image url="@../icons/simple/pinSimple.jpg"/>
+            </image>
+        </ImageView>
+        <ImageView fitHeight="110.0" fitWidth="164.0" layoutX="29.0" layoutY="229.0">
+            <image>
+                <Image url="@../icons/simple/axleSimple.jpg"/>
+            </image>
+        </ImageView>
+    </children>
 </AnchorPane>

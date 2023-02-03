@@ -11,7 +11,6 @@ module strengthdetailscalculator {
     requires static lombok;
     requires templ4docx;
 
-
     opens strengthdetailscalculator to javafx.fxml;
     exports strengthdetailscalculator;
     exports strengthdetailscalculator.controller;

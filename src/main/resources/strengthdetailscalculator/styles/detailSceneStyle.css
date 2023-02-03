@@ -1,0 +1,12 @@
+.label{
+    -fx-font-size: 18;
+}
+.button {
+    -fx-font-size: 18;
+}
+.text-field{
+    -fx-font-size: 14;
+}
+.combo-box{
+    -fx-font-size: 14;
+}

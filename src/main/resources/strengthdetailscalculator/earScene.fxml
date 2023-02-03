@@ -10,157 +10,37 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane centerShape="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="strengthdetailscalculator.controller.EarController">
-   <Label layoutX="119.0" layoutY="14.0" text="Введите характеристики проушины" underline="true">
-      <font>
-         <Font size="20.0" />
-      </font>
-   </Label>
-
-   <Label layoutX="70.0" layoutY="389.0" text="Наименование детали">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-
-   <TextField fx:id="name" layoutX="358.0" layoutY="389.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-
-   <Label layoutX="70.0" layoutY="429.0" text="Обозначение">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-
-   <TextField fx:id="code" layoutX="358.0" layoutY="429.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-
-   <Label layoutX="70.0" layoutY="469.0" text="Внешний диаметр D, мм">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-
-   <TextField fx:id="outerDiameter" layoutX="358.0" layoutY="469.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-
-   <Label layoutX="70.0" layoutY="509.0" text="Внутренний диаметр d, мм">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-
-   <TextField fx:id="internalDiameter" layoutX="358.0" layoutY="509.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-
-   <Label layoutX="70.0" layoutY="549.0" text="Толщина, мм">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-
-   <TextField fx:id="thickness" layoutX="358.0" layoutY="549.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-
-
-   <Label layoutX="70.0" layoutY="589.0" text="Смещение отверстия c, мм">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-
-   <TextField fx:id="eccentricity" layoutX="358.0" layoutY="589.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-
-   <Label layoutX="70.0" layoutY="629.0" text="Положение проушины">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-
-   <ComboBox fx:id="earType" layoutX="358.0" layoutY="629.0" onAction="#getEarType" onDragDetected="#getEarType" onHiding="#getEarType" onShown="#getEarType" prefHeight="30.0" prefWidth="171.0" promptText="Положение и материал" />
-
-   <CheckBox fx:id="isSingleShearedConnection" layoutX="70.0" layoutY="669.0" mnemonicParsing="false" onAction="#getAdditionalProperties" text="Односрезное соединение">
-      <font>
-         <Font size="14.0" />
-      </font>
-   </CheckBox>
-
-   <CheckBox fx:id="currentEarIsLarger" layoutX="358.0" layoutY="669.0" mnemonicParsing="false" onAction="#getGapProperty" disable="true" text="Наибольшая проушина">
-      <font>
-         <Font size="14.0" />
-      </font>
-   </CheckBox>
-
-   <Label layoutX="70.0" layoutY="709.0" text="Зазор между проушинами s, мм">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-
-   <TextField fx:id="gap" disable="true" layoutX="358.0" layoutY="708.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font>
-   </TextField>
-
-   <Label layoutX="70.0" layoutY="749.0" text="Материал">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-
-   <TextField fx:id="material" layoutX="358.0" layoutY="748.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-
-   <Label layoutX="70.0" layoutY="791.0" text="Предел текучести">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-
-   <TextField fx:id="yieldStress" layoutX="358.0" layoutY="789.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-
-   <Label layoutX="70.0" layoutY="832.0" text="Действующее усилие">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-
-   <TextField fx:id="force" layoutX="358.0" layoutY="830.0" prefHeight="25.0" prefWidth="171.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-
-   <Button fx:id="printButton" disable="true" layoutX="274.0" layoutY="891.0" mnemonicParsing="false" onAction="#printDoc" prefHeight="39.0" prefWidth="262.0" text="Раcчитать и получить отчёт">
-      <font>
-         <Font size="18.0" />
-      </font></Button>
-   <Button layoutX="76.0" layoutY="891.0" mnemonicParsing="false" onAction="#switchStartScene" prefHeight="39.0" prefWidth="160.0" text="В главное меню">
-      <font>
-         <Font size="18.0" />
-      </font></Button>
+<AnchorPane centerShape="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="strengthdetailscalculator.controller.EarController" stylesheets="@styles/detailSceneStyle.css">
+   <Label fx:id="mainTitle" layoutX="119.0" layoutY="14.0" text="Введите характеристики проушины" underline="true"/>
+   <Label layoutX="70.0" layoutY="389.0" text="Наименование детали"/>
+   <TextField fx:id="name" layoutX="358.0" layoutY="389.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="70.0" layoutY="429.0" text="Обозначение"/>
+   <TextField fx:id="code" layoutX="358.0" layoutY="429.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="70.0" layoutY="469.0" text="Внешний диаметр D, мм"/>
+   <TextField fx:id="outerDiameter" layoutX="358.0" layoutY="469.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="70.0" layoutY="509.0" text="Внутренний диаметр d, мм"/>
+   <TextField fx:id="internalDiameter" layoutX="358.0" layoutY="509.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="70.0" layoutY="549.0" text="Толщина, мм"/>
+   <TextField fx:id="thickness" layoutX="358.0" layoutY="549.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="70.0" layoutY="589.0" text="Смещение отверстия c, мм"/>
+   <TextField fx:id="eccentricity" layoutX="358.0" layoutY="589.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="70.0" layoutY="629.0" text="Положение проушины"/>
+   <ComboBox fx:id="earType" layoutX="358.0" layoutY="629.0" onAction="#getEarType" onShown="#getEarType" prefHeight="30.0" prefWidth="171.0" promptText="Положение и материал" />
+   <CheckBox fx:id="isSingleShearedConnection" layoutX="70.0" layoutY="669.0" mnemonicParsing="false" onAction="#getAdditionalProperties" text="Односрезное соединение"/>
+   <CheckBox fx:id="currentEarIsLarger" disable="true" layoutX="358.0" layoutY="669.0" mnemonicParsing="false" onAction="#getGapProperty" text="Наибольшая проушина"/>
+   <Label layoutX="70.0" layoutY="709.0" text="Зазор между проушинами s, мм"/>
+   <TextField fx:id="gap" disable="true" layoutX="358.0" layoutY="708.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="70.0" layoutY="749.0" text="Материал"/>
+   <TextField fx:id="material" layoutX="358.0" layoutY="748.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="70.0" layoutY="791.0" text="Предел текучести"/>
+   <TextField fx:id="yieldStress" layoutX="358.0" layoutY="789.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Label layoutX="70.0" layoutY="832.0" text="Действующее усилие"/>
+   <TextField fx:id="force" layoutX="358.0" layoutY="830.0" prefHeight="25.0" prefWidth="171.0"/>
+   <Button fx:id="printButton" disable="true" layoutX="274.0" layoutY="891.0" mnemonicParsing="false" onAction="#printDoc" prefHeight="39.0" prefWidth="262.0" text="Раcчитать и получить отчёт"/>
+   <Button layoutX="76.0" layoutY="891.0" mnemonicParsing="false" onAction="#switchStartScene" prefHeight="39.0" prefWidth="160.0" text="В главное меню"/>
    <ImageView fitHeight="288.0" fitWidth="356.0" layoutX="111.0" layoutY="57.0">
       <image>
          <Image url="@../icons/full/ear.jpg" />
       </image>
    </ImageView>
-
 </AnchorPane>
