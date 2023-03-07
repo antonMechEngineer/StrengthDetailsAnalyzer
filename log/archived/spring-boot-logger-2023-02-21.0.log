@@ -1,0 +1,46 @@
+2023-02-21 10:10:34,001 ERROR org.springframework.boot.SpringApplication [JavaFX-Launcher] Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'weldController' defined in file [C:\Users\user\Desktop\StrengthDetailsAnalyzer\target\classes\strengthDetailsAnalyzer\controller\WeldController.class]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [strengthDetailsAnalyzer.controller.WeldController]: Constructor threw exception; nested exception is java.lang.RuntimeException: java.io.FileNotFoundException: 
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:312)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:293)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1358)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1204)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:557)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:879)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:878)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at org.springframework.boot.builder.SpringApplicationBuilder.run(SpringApplicationBuilder.java:140)
+	at strengthDetailsAnalyzer.JavaFxRunner.init(JavaFxRunner.java:22)
+	at com.sun.javafx.application.LauncherImpl.launchApplication1(LauncherImpl.java:825)
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication$2(LauncherImpl.java:196)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [strengthDetailsAnalyzer.controller.WeldController]: Constructor threw exception; nested exception is java.lang.RuntimeException: java.io.FileNotFoundException: 
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:213)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:117)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:308)
+	... 20 common frames omitted
+Caused by: java.lang.RuntimeException: java.io.FileNotFoundException: 
+	at strengthDetailsAnalyzer.utils.DataLoader.loadDataFromCSVFile(DataLoader.java:104)
+	at strengthDetailsAnalyzer.utils.DataLoader.getCheckType(DataLoader.java:64)
+	at strengthDetailsAnalyzer.controller.WeldController.loadData(WeldController.java:248)
+	at strengthDetailsAnalyzer.controller.WeldController.<init>(WeldController.java:41)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:200)
+	... 22 common frames omitted
+Caused by: java.io.FileNotFoundException: 
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:219)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+	at java.base/java.util.Scanner.<init>(Scanner.java:639)
+	at strengthDetailsAnalyzer.utils.DataLoader.loadDataFromCSVFile(DataLoader.java:71)
+	... 30 common frames omitted

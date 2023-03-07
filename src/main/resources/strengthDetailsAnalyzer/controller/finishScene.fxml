@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="167.0" prefWidth="241.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="strengthDetailsAnalyzer.controller.FinishController" stylesheets="@../styles/mainSceneStyle.css">
+   <Label layoutX="22.0" layoutY="21.0" prefHeight="44.0" prefWidth="219.0" text="Выполнить ещё расчёт ?" textAlignment="CENTER"/>
+   <Button layoutX="147.0" layoutY="86.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="69.0" onAction="#switchStartScene" text="Да"/>
+   <Button layoutX="31.0" layoutY="86.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="69.0" onAction="#finishApplication" text="Нет"/>
+</AnchorPane>
