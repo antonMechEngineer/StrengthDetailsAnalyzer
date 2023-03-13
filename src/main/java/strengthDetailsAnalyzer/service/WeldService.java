@@ -1,4 +1,5 @@
 package strengthDetailsAnalyzer.service;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
@@ -8,9 +9,13 @@ import strengthDetailsAnalyzer.service.interfaces.Readable;
 import strengthDetailsAnalyzer.utils.DocumentWriter;
 import strengthDetailsAnalyzer.utils.InputDataManager;
 import strengthDetailsAnalyzer.utils.response.Response;
+import strengthDetailsAnalyzer.utils.response.ResponseStatus;
+
 import java.util.*;
 import java.util.stream.Collectors;
+
 import static strengthDetailsAnalyzer.controller.WeldController.*;
+import static strengthDetailsAnalyzer.utils.response.ResponseStatus.*;
 
 @Component
 public class WeldService extends DetailService implements Readable {
@@ -31,34 +36,38 @@ public class WeldService extends DetailService implements Readable {
     private final JSONArray weldCheckTypesJSON = new JSONArray(read(PATH_CHECK_TYPE));
     private final JSONArray stressConditionsJSON = new JSONArray(read(PATH_STRESS_CONDITION));
 
-    public WeldService(DocumentWriter documentWriter, InputDataManager inputDataManager){
+    public WeldService(DocumentWriter documentWriter, InputDataManager inputDataManager) {
         super(inputDataManager);
         this.documentWriter = documentWriter;
     }
 
     @Override
-    protected Response writeSpecifiedDetail(Detail detail, List<String> data) {
+    protected Response writeSpecifiedDetail(Detail detail, ArrayList<String> data) {
         Weld weld = build(detail, data);
         return documentWriter.writeWeld(weld);
     }
 
     @Override
-    protected Response checkData(List<String> data) {
-        List<String> numericalData = List.of(data.get(INDEX_A), data.get(INDEX_Fx), data.get(INDEX_Fy), data.get(INDEX_Fz),
-                data.get(INDEX_lx), data.get(INDEX_ly), data.get(INDEX_lz), data.get(INDEX_Ix), data.get(INDEX_Iy),
-                data.get(INDEX_xMax), data.get(INDEX_yMax), data.get(INDEX_r));
-        Response response = inputDataManager.checkPositiveNumericalData(numericalData);
-        return response;
+    protected Response checkData(ArrayList<String> data) {
+        List<String> numericalData = List.of(data.get(INDEX_Fx), data.get(INDEX_Fy), data.get(INDEX_Fz), data.get(INDEX_lx), data.get(INDEX_ly), data.get(INDEX_lz));
+        List<String> nonZeroNumericalData = List.of(data.get(INDEX_A), data.get(INDEX_Ix), data.get(INDEX_Iy), data.get(INDEX_xMax), data.get(INDEX_yMax), data.get(INDEX_r));
+        Response resNumData = inputDataManager.checkMainNumAndEmptyData(numericalData);
+        Response resNonZeroNumData = inputDataManager.checkPositiveNumericalData(nonZeroNumericalData);
+        if (resNumData.getResponseStatus().equals(FAIL) | resNonZeroNumData.getResponseStatus().equals(FAIL)) {
+            return new Response(FAIL, resNonZeroNumData.getDescription() + resNumData.getDescription());
+        }
+        return new Response(SUCCESS);
     }
 
     @Override
-    protected List<String> prepareData(List<String> data) {
-        List<String> replacedDotsData = inputDataManager.replaceCommasWithDots(data);
+    protected ArrayList<String> prepareData(ArrayList<String> data) {
+        ArrayList<String> partlyProcessedData = inputDataManager.replaceEmptyStringWithZero(data);
+        ArrayList<String> replacedDotsData = inputDataManager.replaceCommasWithDots(partlyProcessedData);
         ArrayList<String> replacedNullData = inputDataManager.prepareNullableString(replacedDotsData, "0");
         return replacedNullData;
     }
 
-    private Weld build(Detail detail, List<String> data){
+    private Weld build(Detail detail, List<String> data) {
         Double A = Double.valueOf(data.get(INDEX_A));
         Double Fx = Double.valueOf(data.get(INDEX_Fx));
         Double Fy = Double.valueOf(data.get(INDEX_Fy));
@@ -97,11 +106,11 @@ public class WeldService extends DetailService implements Readable {
                 getJSONObject(preTempered).getJSONObject(matMethod).getDouble(postTempered);
     }
 
-    public Double getK2(String weldType, String weldNum, String weldTechnology, String stressCond, String mat, String checkT){
-        return  Double.valueOf(K2JSON.get(weldType + weldNum  + stressCond + mat + weldTechnology + checkT).toString());
+    public Double getK2(String weldType, String weldNum, String weldTechnology, String stressCond, String mat, String checkT) {
+        return Double.valueOf(K2JSON.get(weldType + weldNum + stressCond + mat + weldTechnology + checkT).toString());
     }
 
-    public Double getBeta(String weldTechnology){
+    public Double getBeta(String weldTechnology) {
         return Double.valueOf(weldTechnologiesJSON.get(weldTechnology).toString());
     }
 
@@ -114,7 +123,7 @@ public class WeldService extends DetailService implements Readable {
     }
 
     public Set<String> getThickness(String material, String sort) {
-        return  K1JSON.getJSONObject(material).getJSONObject(sort).
+        return K1JSON.getJSONObject(material).getJSONObject(sort).
                 names().toList().stream().map(Object::toString).collect(Collectors.toSet());
     }
 
@@ -154,7 +163,6 @@ public class WeldService extends DetailService implements Readable {
     public Set<String> getStressConditions() {
         return stressConditionsJSON.toList().stream().map(Object::toString).collect(Collectors.toSet());
     }
-
 
 
 }

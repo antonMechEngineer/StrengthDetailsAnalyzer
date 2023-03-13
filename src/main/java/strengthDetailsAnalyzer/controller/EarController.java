@@ -86,7 +86,7 @@ public class EarController extends DetailController {
         processResponse(response, event);
     }
 
-    protected List<String> getData() {
+    protected ArrayList<String> getData() {
         ArrayList<String> data = new ArrayList<>();
         data.add(INDEX_OUTER_D, outerDiameter.getText());
         data.add(INDEX_INTERNAL_D, internalDiameter.getText());
@@ -99,8 +99,6 @@ public class EarController extends DetailController {
         data.add(INDEX_FORCE, force.getText());
         return data;
     }
-
-
 
     @FXML
     private void getEarType() {

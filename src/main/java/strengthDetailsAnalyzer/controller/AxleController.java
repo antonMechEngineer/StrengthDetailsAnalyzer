@@ -61,7 +61,7 @@ public class AxleController extends DetailController {
     }
 
     @Override
-    protected List<String> getData() {
+    protected ArrayList<String> getData() {
         ArrayList<String> axleData = new ArrayList<>();
         axleData.add(INDEX_OUTER_DIAMETER, outerDiameter.getText());
         axleData.add(INDEX_INTERNAL_DIAMETER, internalDiameter.getText());

@@ -10,6 +10,7 @@ import strengthDetailsAnalyzer.utils.InputDataManager;
 import strengthDetailsAnalyzer.utils.response.Response;
 import strengthDetailsAnalyzer.utils.response.ResponseStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static strengthDetailsAnalyzer.controller.PinController.*;
@@ -26,7 +27,7 @@ public class PinService extends DetailService implements DetailChecked {
     }
 
     @Override
-    protected Response writeSpecifiedDetail(Detail detail, List<String> data) {
+    protected Response writeSpecifiedDetail(Detail detail, ArrayList<String> data) {
         Pin pin = build(detail, data);
         Response response = documentWriter.writePin(pin);
         return response;
@@ -42,15 +43,15 @@ public class PinService extends DetailService implements DetailChecked {
     }
 
     @Override
-    protected Response checkData(List<String> data) {
+    protected Response checkData(ArrayList<String> data) {
         Response resPinData0 = inputDataManager.checkMainNumericalData(List.of(data.get(INDEX_INTERNAL_DIAMETER)));
         Response resPinData1 = inputDataManager.checkNonZeroNumericalData(List.of(data.get(INDEX_OUTER_DIAMETER), data.get(INDEX_FORCE)));
         return coverToResponse(resPinData0.getDescription() + resPinData1.getDescription());
     }
 
     @Override
-    protected List<String> prepareData(List<String> data) {
-        List<String> processedData = inputDataManager.replaceCommasWithDots(data);
+    protected ArrayList<String> prepareData(ArrayList<String> data) {
+        ArrayList<String> processedData = inputDataManager.replaceCommasWithDots(data);
         return processedData;
     }
 }

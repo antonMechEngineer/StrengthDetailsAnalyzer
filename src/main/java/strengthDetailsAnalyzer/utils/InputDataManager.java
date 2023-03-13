@@ -15,12 +15,17 @@ public class InputDataManager implements ResponseCovered {
     private static final String MAIN_NUMERICAL_PATTERN = "(\\d+(\\.\\d*)*)\\z|(\\d+(,\\d*)*)\\z";
     private static final String Z_NUMERICAL_PATTERN = "\\d+\\z";
     private static final String ERROR_ZERO_NUMERICAL_PATTERN = "(0+(\\.0*)*)\\z|(0+(,0*)*)\\z";
-    private static final String ERROR_EMPTY_TEXT_PATTERN = "";
+    private static final String EMPTY_PATTERN = "";
     private static final String DESCRIPTION = " имеет в качестве аргумента не корректное значение: ";
+
+    public Response checkMainNumAndEmptyData(List<String> data){
+        Boolean isCorrectPattern = true;
+        return checkData(MAIN_NUMERICAL_PATTERN + "|" + EMPTY_PATTERN, data, isCorrectPattern);
+    }
 
     public Response checkTextData(List<String> textData) {
         Boolean isCorrectPattern = false;
-        return checkData(ERROR_EMPTY_TEXT_PATTERN, textData, isCorrectPattern);
+        return checkData(EMPTY_PATTERN, textData, isCorrectPattern);
     }
 
     public Response checkNonZeroNumericalData(List<String> numericalData) {
@@ -58,7 +63,7 @@ public class InputDataManager implements ResponseCovered {
         return coverToResponse(error);
     }
 
-    public List<String> replaceCommasWithDots(List<String> data) {
+    public ArrayList<String> replaceCommasWithDots(List<String> data) {
         ArrayList<String> processedStrings = new ArrayList<>();
         for (String string : data) {
             String processedString = replaceCommasWithDots(string);
@@ -71,6 +76,19 @@ public class InputDataManager implements ResponseCovered {
         String processedString = dataString.replace(",", ".");
         return processedString;
     }
+
+    public ArrayList<String> replaceEmptyStringWithZero(List<String> data) {
+        ArrayList<String> resList = new ArrayList<>();
+        for (String string : data) {
+            if (string.equals(EMPTY_PATTERN)) {
+                resList.add("0");
+            } else {
+                resList.add(string);
+            }
+        }
+        return resList;
+    }
+
 
     public ArrayList<String> prepareNullableString(List<String> data, Integer nullableIndex, String replaceSign) {
         ArrayList<String> processedData = new ArrayList<>();
@@ -93,7 +111,7 @@ public class InputDataManager implements ResponseCovered {
             } else {
                 processedData.add(dataMember);
             }
-            currentIndex ++;
+            currentIndex++;
         }
         return processedData;
     }

@@ -58,7 +58,7 @@ public abstract class DetailController extends Controller implements Alerted {
 
     public abstract void printDoc(ActionEvent event) throws IOException;
 
-    protected abstract List<String> getData();
+    protected abstract ArrayList<String> getData();
 
     @FXML
     protected void switchStartScene(ActionEvent event) {
@@ -71,7 +71,7 @@ public abstract class DetailController extends Controller implements Alerted {
         switchSceneByEvent(root, FinishController.NAME, event);
     }
 
-    public final List<String> getDetailData() {
+    public final ArrayList<String> getDetailData() {
         ArrayList<String> textDataDetail = new ArrayList<>();
         textDataDetail.add(INDEX_NAME, name.getText());
         textDataDetail.add(INDEX_CODE, code.getText());
@@ -80,7 +80,7 @@ public abstract class DetailController extends Controller implements Alerted {
         return textDataDetail;
     }
 
-    protected final List<String> getNumericalDataDetail() {
+    protected final ArrayList<String> getNumericalDataDetail() {
         ArrayList<String> numericalDataDetail = new ArrayList<>();
         numericalDataDetail.add(INDEX_YIELD_STRESS, yieldStress.getText());
         numericalDataDetail.add(INDEX_USER_SAFETY_FACTOR, usersSafetyFactor.getText());

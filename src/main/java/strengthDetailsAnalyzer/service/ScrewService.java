@@ -41,7 +41,7 @@ public class ScrewService extends DetailService {
     }
 
     @Override
-    protected Response writeSpecifiedDetail(Detail detail, List<String> data) {
+    protected Response writeSpecifiedDetail(Detail detail, ArrayList<String> data) {
         Screw screw = build(detail, data);
         Response resThreadProperties = inputDataManager.checkInputThreadProperties(screw);
         if (resThreadProperties.getResponseStatus() == FAIL) {
@@ -52,7 +52,7 @@ public class ScrewService extends DetailService {
     }
 
     @Override
-    protected Response checkData(List<String> data) {
+    protected Response checkData(ArrayList<String> data) {
         ArrayList<String> numericalData = new ArrayList<>(Arrays.asList(data.get(INDEX_MAIN_D), data.get(INDEX_HEIGHT), data.get(INDEX_FORCE)));
         Boolean isSmallPitch = Boolean.valueOf(data.get(INDEX_IS_SMALL_PITCH));
         if (isSmallPitch) {
@@ -63,8 +63,8 @@ public class ScrewService extends DetailService {
     }
 
     @Override
-    protected List<String> prepareData(List<String> data) {
-        List<String> processedData = inputDataManager.replaceCommasWithDots(data);
+    protected ArrayList<String> prepareData(ArrayList<String> data) {
+        ArrayList<String> processedData = inputDataManager.replaceCommasWithDots(data);
         return processedData;
     }
 

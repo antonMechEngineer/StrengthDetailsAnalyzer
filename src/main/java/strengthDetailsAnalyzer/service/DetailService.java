@@ -1,17 +1,16 @@
 package strengthDetailsAnalyzer.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import strengthDetailsAnalyzer.controller.DetailController;
 import strengthDetailsAnalyzer.entity.Detail;
 import strengthDetailsAnalyzer.service.interfaces.DetailChecked;
-import strengthDetailsAnalyzer.utils.DocumentWriter;
 import strengthDetailsAnalyzer.utils.InputDataManager;
 import strengthDetailsAnalyzer.utils.ResponseCovered;
 import strengthDetailsAnalyzer.utils.response.Response;
 import strengthDetailsAnalyzer.utils.response.ResponseStatus;
 
-import java.util.List;
+import java.util.ArrayList;
 
+import static strengthDetailsAnalyzer.controller.DetailController.INDEX_USER_SAFETY_FACTOR;
 import static strengthDetailsAnalyzer.entity.Detail.DEFAULT_MIN_SAFETY_FACTOR;
 
 public abstract class DetailService implements ResponseCovered, DetailChecked {
@@ -24,30 +23,35 @@ public abstract class DetailService implements ResponseCovered, DetailChecked {
         this.inputDataManager = inputDataManager;
     }
 
-    protected abstract Response writeSpecifiedDetail(Detail detail, List<String> data);
+    protected abstract Response writeSpecifiedDetail(Detail detail, ArrayList<String> data);
 
-    protected abstract Response checkData(List<String> data);
+    protected abstract Response checkData(ArrayList<String> data);
 
-    protected abstract List<String> prepareData(List<String> data);
+    protected abstract ArrayList<String> prepareData(ArrayList<String> data);
 
-
-    public Response write(List<String> textDetailData, List<String> numericalDetailData, List<String> data) {
-        Response preProcessData = preProcessData(textDetailData, numericalDetailData, data);
+    public Response write(ArrayList<String> textDetailData, ArrayList<String> numericalDetailData, ArrayList<String> data) {
+        ArrayList<String> preparedNumDetailData = prepareNumericalDetailData(numericalDetailData);
+        ArrayList<String> preparedData = prepareData(data);
+        Response preProcessData = checkData(textDetailData, preparedNumDetailData, preparedData);
         if (preProcessData.getResponseStatus() == ResponseStatus.SUCCESS) {
-            Detail detail = new Detail(textDetailData, numericalDetailData);
-            Response response = writeSpecifiedDetail(detail, data);
+            System.out.println(preparedData);
+            Detail detail = new Detail(textDetailData, preparedNumDetailData);
+            Response response = writeSpecifiedDetail(detail, preparedData);
             return response;
         }
         return preProcessData;
     }
 
-    private Response preProcessData(List<String> textDetailData, List<String> numericalDetailData, List<String> data) {
-        List<String> processedNumericalDetailData = inputDataManager.replaceCommasWithDots(numericalDetailData);
-        processedNumericalDetailData = inputDataManager.prepareNullableString(processedNumericalDetailData, DetailController.INDEX_USER_SAFETY_FACTOR, DEFAULT_MIN_SAFETY_FACTOR.toString());
-        Response detailChecking = checkDetailData(inputDataManager, textDetailData, processedNumericalDetailData);
-        List<String> processedData = prepareData(data);
+    private Response checkData(ArrayList<String> textDetailData, ArrayList<String> numericalDetailData, ArrayList<String> data) {
+        Response detailChecking = checkDetailData(inputDataManager, textDetailData, numericalDetailData);
         Response dataChecking = checkData(data);
         return coverToResponse(detailChecking.getDescription() + dataChecking.getDescription());
+    }
+
+    private ArrayList<String> prepareNumericalDetailData(ArrayList<String> numericalDetailData){
+        ArrayList<String> replacedCommasWithDots = inputDataManager.replaceCommasWithDots(numericalDetailData);
+        ArrayList<String> processedNumDetailData = inputDataManager.prepareNullableString(replacedCommasWithDots, INDEX_USER_SAFETY_FACTOR, DEFAULT_MIN_SAFETY_FACTOR.toString());
+        return processedNumDetailData;
     }
 }
 

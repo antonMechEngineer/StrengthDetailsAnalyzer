@@ -11,6 +11,7 @@ import strengthDetailsAnalyzer.utils.InputDataManager;
 import strengthDetailsAnalyzer.utils.response.Response;
 import strengthDetailsAnalyzer.utils.response.ResponseStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -22,7 +23,7 @@ public class AxleService extends PinService {
     }
 
     @Override
-    protected Response writeSpecifiedDetail(Detail detail, List<String> data){
+    protected Response writeSpecifiedDetail(Detail detail, ArrayList<String> data){
         Axle axle = build(detail, data);
         Response resAxleProperties = inputDataManager.checkNonZeroNumericalData(List.of(axle.getSupportLength().toString()));
         if (resAxleProperties.getResponseStatus() == ResponseStatus.FAIL) {
@@ -41,11 +42,9 @@ public class AxleService extends PinService {
     }
 
     @Override
-    protected Response checkData(List<String> data) {
+    protected Response checkData(ArrayList<String> data) {
         Response pinResponse = super.checkData(data);
         Response checkLength = inputDataManager.checkPositiveNumericalData(List.of(data.get(AxleController.INDEX_NUMBER_SUPPORT_LENGTH)));
         return coverToResponse(pinResponse.getDescription() + checkLength.getDescription());
     }
-
-
 }

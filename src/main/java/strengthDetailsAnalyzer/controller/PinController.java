@@ -57,7 +57,7 @@ public class PinController extends DetailController {
         processResponse(response, event);
     }
 
-    protected List<String> getData() {
+    protected ArrayList<String> getData() {
         ArrayList<String> pinData = new ArrayList<>();
         pinData.add(INDEX_OUTER_DIAMETER, outerDiameter.getText());
         pinData.add(INDEX_INTERNAL_DIAMETER, internalDiameter.getText());

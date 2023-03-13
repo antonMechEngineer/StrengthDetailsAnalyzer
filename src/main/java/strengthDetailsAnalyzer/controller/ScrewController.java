@@ -67,7 +67,7 @@ public class ScrewController extends DetailController {
         processResponse(response, event);
     }
 
-    protected List<String> getData() {
+    protected ArrayList<String> getData() {
         ArrayList<String> data = new ArrayList<>();
         data.add(INDEX_MAIN_D, mainD.getText());
         data.add(INDEX_HEIGHT, height.getText());

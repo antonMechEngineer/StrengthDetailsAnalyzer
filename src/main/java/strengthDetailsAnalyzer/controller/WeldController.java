@@ -107,7 +107,7 @@ public class WeldController extends DetailController {
     private ComboBox<String> weldTechnology;
 
     @Override
-    protected List<String> getData() {
+    protected ArrayList<String> getData() {
         ArrayList<String> data = new ArrayList<>();
         data.add(INDEX_A, A.getText());
         data.add(INDEX_Fx, Fx.getText());
@@ -155,7 +155,8 @@ public class WeldController extends DetailController {
 
 
     public void printDoc(ActionEvent event) throws IOException {
-        Response response = weldService.write(getDetailData(), getNumericalDataDetail(), getData());
+        ArrayList<String> data = getData();
+        Response response = weldService.write(getDetailData(), getNumericalDataDetail(), data);
         processResponse(response, event);
     }
 

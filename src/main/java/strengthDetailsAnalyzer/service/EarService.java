@@ -10,6 +10,7 @@ import strengthDetailsAnalyzer.utils.InputDataManager;
 import strengthDetailsAnalyzer.utils.response.Response;
 import strengthDetailsAnalyzer.utils.response.ResponseStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static strengthDetailsAnalyzer.controller.EarController.*;
@@ -27,7 +28,7 @@ public class EarService extends DetailService {
     }
 
     @Override
-    protected Response writeSpecifiedDetail(Detail detail, List<String> data) {
+    protected Response writeSpecifiedDetail(Detail detail, ArrayList<String> data) {
         Ear ear = build(detail, data);
         Response response = documentWriter.writeEar(ear);
         return response;
@@ -49,7 +50,7 @@ public class EarService extends DetailService {
     }
 
     @Override
-    protected Response checkData(List<String> data) {
+    protected Response checkData(ArrayList<String> data) {
         List<String> positiveData = List.of(data.get(INDEX_OUTER_D), data.get(INDEX_INTERNAL_D), data.get(INDEX_THICKNESS), data.get(INDEX_FORCE));
         List<String> mainNumericalData = List.of(data.get(INDEX_ECCENTRICITY));
         Response checkNonZeroProperties = inputDataManager.checkPositiveNumericalData(positiveData);
@@ -58,9 +59,9 @@ public class EarService extends DetailService {
     }
 
     @Override
-    protected List<String> prepareData(List<String> data) {
-        List<String> clarifyNullValueData = inputDataManager.prepareNullableString(data, INDEX_TYPE_EAR, "");
-        List<String> processedData = inputDataManager.replaceCommasWithDots(clarifyNullValueData);
+    protected ArrayList<String> prepareData(ArrayList<String> data) {
+        ArrayList<String> clarifyNullValueData = inputDataManager.prepareNullableString(data, INDEX_TYPE_EAR, "");
+        ArrayList<String> processedData = inputDataManager.replaceCommasWithDots(clarifyNullValueData);
         return processedData;
     }
 
