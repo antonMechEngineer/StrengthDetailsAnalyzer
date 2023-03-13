@@ -14,7 +14,7 @@
         <Button layoutX="34.0" layoutY="345.0" onAction="#switchToAxleScene" prefHeight="35.0" prefWidth="164.0" text="Ось" />
         <Button layoutX="453.0" layoutY="182.0" onAction="#switchToWeldScene" prefHeight="30.0" prefWidth="164.0" text="Сварка" />
         <Button layoutX="34.0" layoutY="182.0" onAction="#switchToEarScene" prefHeight="35.0" prefWidth="164.0" text="Проушина" />
-        <Label layoutX="104.0" layoutY="14.0" text="Прочностной расчёт" />
+        <Label layoutX="225.0" layoutY="14.0" text="Прочностной расчёт" />
         <ImageView fitHeight="110.0" fitWidth="174.0" layoutX="20.0" layoutY="64.0">
             <image>
                 <Image url="@/icons/simple/earSimple.jpg" />
@@ -35,6 +35,11 @@
                 <Image url="@/icons/simple/axleSimple.jpg" />
             </image>
         </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="164.0" layoutX="458.0" layoutY="61.0">
+         <image>
+            <Image url="@../../icons/simple/weldSimple.jpg" />
+         </image>
+      </ImageView>
 
     </children>
 </AnchorPane>
